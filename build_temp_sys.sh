@@ -1,5 +1,5 @@
-#!/bin/bash
-###  InterGenOS BuildTempSystem.sh - Build the Temporary System used to create the working system separately from the host 
+#!/bin/bash -ex
+###  InterGenOS_build_002 build_temp_sys.sh - Build the Temporary System used to create the working system separately from the host 
 ###  Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
 ###  3/10/2015
 
