@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 ###  InterGenOS_build_002 setup.sh - Put sources and variables in place to build the Temporary System
 ###  Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
 ###  3/11/2015
