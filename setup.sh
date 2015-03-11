@@ -151,7 +151,7 @@ chmod -v a+wt $IGos/sources
 
 wget http://intergenstudios.com/Downloads/InterGenOS/build002/Core/build002_Core_Sources.tar.gz &&
 
-tar xf intergen_os_sources.tar.gz &&
+tar xf build002_Core_Sources.tar.gz &&
 
 mv Sources/* $IGos/sources/ &&
 
