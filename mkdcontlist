@@ -1,0 +1,33 @@
+#!/bin/bash
+cd $1
+CURRENT=`pwd`
+BASENAME=`basename "$CURRENT"`
+list=$(ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/')
+files=$(ls -LR)
+
+echo "=========================================================" > content.list
+echo " ##  Start of '$BASENAME' Content List  ## " >> content.list
+echo "=========================================================" >> content.list
+echo " " >> content.list
+echo Content List created on `date` >> content.list 
+echo " " >> content.list
+echo " " >> content.list
+echo " " >> content.list
+echo "====================" >> content.list
+echo "|  Directory Tree  |" >> content.list
+echo "====================" >> content.list
+echo " " >> content.list
+echo -n "$list" >> content.list
+echo " " >> content.list
+echo " " >> content.list
+echo "=====================" >> content.list
+echo "|  Installed Files  |" >> content.list
+echo "=====================" >> content.list
+echo " " >> content.list
+echo -n "$files" >> content.list
+echo " " >> content.list
+echo " " >> content.list
+echo " " >> content.list
+echo "========================================================" >> content.list
+echo " ##  End of '$BASENAME' Content List  ##" >> content.list
+echo "========================================================" >> content.list
