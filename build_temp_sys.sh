@@ -7,6 +7,10 @@
 ###  Build Temporary System  ###
 ################################
 
+cd /mnt/igos
+
+sed -i '/.\/build_temp_sys.sh/d' /home/igos/.bashrc
+
 cd /mnt/igos/sources
 
 ###################
@@ -663,3 +667,31 @@ cd .. && rm -rf xz-5.2.0
 strip --strip-debug /tools/lib/* &&
 /usr/bin/strip --strip-unneeded /tools/{,s}bin/* &&
 rm -rf /tools/{,share}/{info,man,doc} &&
+
+echo " "
+echo " "
+echo " "
+echo "==================================================================================="
+echo "|                                                                                 |"
+echo "|                        Temporary System Build Completed                         |"
+echo "|                                                                                 |"
+echo "|                      It is now recommended that you open a                      |"
+echo "|                      separate terminal to back up the /tools                    |"
+echo "|                     directory for future use, as the directory                  |"
+echo "|                   will be altered and eventually removed during                 |"
+echo "|                       the remainder of the build process.                       |"
+echo "|                                                                                 |"
+echo "|                    Please 'exit' back into root shell and run                   |"
+echo "|                                                                                 |"
+echo "|                             ./build_core_phase1.sh                              |"
+echo "|                                                                                 |"
+echo "|                               to continue the build                             |"
+echo "|                                     process.                                    |"
+echo "|                                                                                 |"
+echo "|                                  InterGen OSsD                                  |"
+echo "|                                       2015                                      |"
+echo "|                                                                                 |"
+echo "==================================================================================="
+echo " "
+echo " "
+echo " "
