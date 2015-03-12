@@ -3,6 +3,33 @@
 
 #**The InterGenOS Project**
 ---
+
+### Project Status and notes:
+---
+
+```
+
+- Build 002 is seeing 'make check' issues with glibc-2.21.  113 identical errors are being reported with each
+  run, whether it's done using setup.sh to set the temp system or done manually.  #lfs-support hasn't responded
+  yet, but will post when they do
+
+        sample 'make check' output log: http://intergenstudios.com/Downloads/glibc-2.21_make-check_log.txt
+
+- Package separation to be done roughly as:
+    
+    Core- all required lsb packages
+    Base- all base desktop environment packages
+    Extended- all extra desktop environment packages
+
+- Linpack fs locations have been set initially:
+    
+    package cache locations: /var/cache/linpack{core,base,extended}
+    installation locations: /var/local/linpack{core,base,extended}
+
+- More to come...
+
+```
+
   
 Until the installer has been completed, the initial setup for the builds has to be done manually
 The scripts provided make the core system build fairly automated, and scripts are being written
