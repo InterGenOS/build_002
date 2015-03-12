@@ -15,6 +15,12 @@
 
         sample 'make check' output log: http://intergenstudios.com/Downloads/glibc-2.21_make-check_log.txt
 
+- *** RESPONSE FROM LFS-SUPPORT - 3/12 ***
+    [10:05] <archetech_> if the linker tests pass move on
+    [10:07] <archetech_> stuff will blow out later if it's a bad build
+
+    I so love these guys :)
+
 - Package separation to be done roughly as:
     
     Core- all required lsb packages
