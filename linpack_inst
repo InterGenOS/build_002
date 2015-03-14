@@ -1,0 +1,83 @@
+#!/bin/bash
+###  InterGenOS_build_002 linpack_inst - The primary linpack package installation script
+###  Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
+###  3/14/2015
+#
+# - Replicates package directory path structure if needed
+# - Symlinks all package files into core file system
+# - Logs EVERYTHING
+# - (which will be used for all sorts of stuff down the road- ie- 'what provides','uninstall', etc)
+# 
+# **** TO DO LIST ****
+#
+# Fix file/symlink existance error checking- not working prior to changing
+# initial check to use a 'stat' check- haven't re-checked it since that change. 
+# (thinking was that stat would at least show something to check against an empty return- but i'm tired and don't want 
+# to read anymore tonight- sorry)
+#
+#
+
+CUR="$(pwd)"
+BNM="$(basename "$CUR")"
+DIR="$(find linpack_dirs/ -type d | sed 's|linpack_dirs|/usr|g')"
+FIL="$(find linpack_dirs/ -type f | sed 's|linpack_dirs|/usr|g')"
+ILL="$CUR"/"$BNM.inst_log"
+
+echo "======================================================" > $ILL
+echo " ## Start of '$BNM' Installation Log ## " >> $ILL
+echo "======================================================" >> $ILL
+echo " " >> $ILL
+echo "$BNM" Package installed on "$(date)" >> $ILL
+echo " " >> $ILL
+echo " " >> $ILL
+echo "===========================" >> $ILL
+echo "|  Installed Directories  |" >> $ILL
+echo "===========================" >> $ILL
+echo " " >> $ILL
+echo " " >> $ILL
+
+cd .. && mkdir -pv ${DIR[@]} 2>&1 | tee -a $ILL
+
+echo " " >> $ILL
+echo " " >> $ILL
+echo "========================" >> $ILL 
+echo "|  Installed Symlinks  |" >> $ILL
+echo "========================" >> $ILL
+echo " " >> $ILL
+echo " " >> $ILL
+
+for f in ${FIL[@]}; do
+
+        if [ $(stat "$f") -z ]; then
+
+                if [ -f "$f" ]; then
+
+                        echo Installation cannot continue for $f
+                        echo $f is already installed from a manual installation outside of linpack
+                        echo In order for linpack to install the $f package, you\'ll need to remove your manual installation first
+                        echo linpack now exiting
+                        exit 0
+
+                elif [ -h "$f" ]; then
+
+                        echo Installation cannot continue for $f
+                        echo $f is already installed by $(stat -c "%U %G" "$f")
+                        echo Remove the existing $f package with 'linpack -r <package>' and try again
+                        echo linpack now exiting
+                        exit 0
+
+                fi
+
+        else
+                
+                ln -sv "$(echo "$f" | sed 's|/usr|linpack_dirs|g')" "$f" 2>&1 | tee -a $ILL
+
+        fi
+
+done
+
+echo " " >> $ILL
+echo " " >> $ILL
+echo "========================================================" >> $ILL
+echo " ##  End of '$BNM' Installation Log  ##" >> $ILL
+echo "========================================================" >> $ILL
