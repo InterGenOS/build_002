@@ -36,7 +36,7 @@ echo "===========================" >> $ILL
 echo " " >> $ILL
 echo " " >> $ILL
 
-cd .. && mkdir -pv ${DIR[@]} 2>&1 | tee -a $ILL
+mkdir -pv ${DIR[@]} 2>&1 | tee -a $ILL
 
 echo " " >> $ILL
 echo " " >> $ILL
@@ -48,7 +48,7 @@ echo " " >> $ILL
 
 for f in ${FIL[@]}; do
 
-        if [ $(stat "$f") -z ]; then
+        if [ -z "$f" ]; then
 
                 if [ -f "$f" ]; then
 
@@ -81,3 +81,4 @@ echo " " >> $ILL
 echo "========================================================" >> $ILL
 echo " ##  End of '$BNM' Installation Log  ##" >> $ILL
 echo "========================================================" >> $ILL
+
