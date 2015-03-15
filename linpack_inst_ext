@@ -9,8 +9,29 @@
 # installation commands for the package, and will call post installation scripts at
 # their conclusion
 
+CUR="$(pwd)"
+BNM="$(basename "$CUR")"
+ILL="$CUR"/"$BNM.inst_log"
 
+echo " " >> $ILL
+echo " " >> $ILL
+echo "===========================================================" >> $ILL
+echo " ##  Start of '$BNM' linpack_inst_ext logging  ## " >> $ILL
+echo "===========================================================" >> $ILL
 
+$BNM_ext_inst () {
+
+# supplemental installation commands are done in function to provide logging
+
+}
+
+$BNM_ext_inst 2>&1 | tee -a $ILL
+
+echo " " >> $ILL
+echo " " >> $ILL
+echo "===========================================================" >> $ILL
+echo " ##  End of '$BNM' linpack_inst_ext logging  ## " >> $ILL
+echo "===========================================================" >> $ILL
 
 
 exec ./linpack_post_inst
