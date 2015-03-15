@@ -1,0 +1,16 @@
+#!/bin/bash
+###  InterGenOS_build_002 linpack_inst_ext - A supplemental linpack installation script
+###  Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
+###  3/14/2015
+#
+# linpack_inst_ext scripts will be uniquely created for each package during package
+# compilation, performing necessary installation steps outside of directory structure
+# creation and symlink placement.  The scripts will be called as one of the final  
+# installation commands for the package, and will call post installation scripts at
+# their conclusion
+
+
+
+
+
+exec ./linpack_post_inst
