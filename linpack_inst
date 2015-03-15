@@ -79,6 +79,7 @@ done
 echo " " >> $ILL
 echo " " >> $ILL
 echo "========================================================" >> $ILL
-echo " ##  End of '$BNM' Installation Log  ##" >> $ILL
+echo " ##  End of '$BNM' Installation Log  ## " >> $ILL
 echo "========================================================" >> $ILL
 
+exec ./linpack_inst_ext
