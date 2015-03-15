@@ -18,6 +18,8 @@ echo " " >> $ILL
 echo "===========================================================" >> $ILL
 echo " ##  Start of '$BNM' linpack_inst_ext logging  ## " >> $ILL
 echo "===========================================================" >> $ILL
+echo " " >> $ILL
+echo " " >> $ILL
 
 ext_inst () {
 
