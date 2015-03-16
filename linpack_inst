@@ -22,6 +22,7 @@ BNM="$(basename "$CUR")"
 DIR="$(find linpack_dirs/ -type d | sed 's|linpack_dirs|/usr|g')"
 FIL="$(find linpack_dirs/ -type f | sed 's|linpack_dirs|/usr|g')"
 ILL="$CUR"/"$BNM.inst_log"
+SRC=${"$CUR"/linpack_dirs}
 
 echo "======================================================" > $ILL
 echo " ## Start of '$BNM' Installation Log ## " >> $ILL
@@ -70,7 +71,7 @@ for f in ${FIL[@]}; do
 
         else
                 
-                ln -sv "$(echo "$f" | sed 's|/usr|linpack_dirs|g')" "$f" 2>&1 | tee -a $ILL
+                ln -sv "$SRC" "$f" 2>&1 | tee -a $ILL
 
         fi
 
