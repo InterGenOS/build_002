@@ -22,7 +22,7 @@ BNM="$(basename "$CUR")"
 DIR="$(find linpack_dirs/ -type d | sed 's|linpack_dirs|/usr|g')"
 FIL="$(find linpack_dirs/ -type f | sed 's|linpack_dirs|/usr|g')"
 ILL="$CUR"/"$BNM.inst_log"
-SRC=${"$CUR"/linpack_dirs}
+SRC="${CUR}/linpack_dirs"
 
 echo "======================================================" > $ILL
 echo " ## Start of '$BNM' Installation Log ## " >> $ILL
