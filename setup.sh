@@ -23,7 +23,7 @@ green="$(echo -e "\033[0;32m")"
 lblue="$(echo -e "\033[1;34m")"
 NC="$(echo -e "\033[0m")"
 
-### Python heading
+### Python heading ### Playing with Python to create the delayed printout of the header on screen- nothing more.  :)
 function print_heading {
 python - <<END
 ### Python variables
@@ -76,6 +76,9 @@ echo "${green}Ok, target build ${NC}Partition ID ${green}is /dev/${NC}$REPLY"
 echo " "
 read -p "${green}Ready to begin${NC}? [y/n] ${green}:${NC} " opt
 
+### Fairly self-explanatory.  Not very in-depth with any safety-checks other than 'is root', it's assumed that anyone who wants to build a system using these scripts
+### is somewhat up to speed on figuring out what this script is doing.
+
 if [ $opt = y ]; then
     echo " "
     echo -e "${green}Thank you, the build will now proceed${NC}"
@@ -93,7 +96,7 @@ if [ $opt = y ]; then
     echo "export IGosPart=/dev/$REPLY" >> ~/.bash_profile
 else
     echo " "
-    echo -e "${red}Oh,${NC}"
+    echo -e "${red}Oh,${NC}" # Gives a second attempt to enter the appropriate build partition
     sleep 1
     echo " "
     echo -e "${red}snap,${NC}"
@@ -124,7 +127,7 @@ else
         echo "export IGosPart=/dev/$REPLY2" >> ~/.bash_profile
     else
         echo " "
-        echo -e "${red}Oh,${NC}"
+        echo -e "${red}Oh,${NC}" # Bails out if two bad choices are entered in a row
         sleep 1
         echo " "
         echo -e "${red}snap,${NC}"

@@ -17,12 +17,12 @@
 # -NOTE- Luke said 'man test'....   0_o
 #
 
-CUR="$(pwd)"
-BNM="$(basename "$CUR")"
-DIR="$(find linpack_dirs/ -type d | sed 's|linpack_dirs|/usr|g')"
-FIL="$(find linpack_dirs/ -type f | sed 's|linpack_dirs|/usr|g')"
-ILL="$CUR"/"$BNM.inst_log"
-SRC="${CUR}/linpack_dirs"
+CUR="$(pwd)"  # Set pwd to variable
+BNM="$(basename "$CUR")"  # Set package name variable
+DIR="$(find linpack_dirs/ -type d | sed 's|linpack_dirs|/usr|g')"  # Create directory array for mkdir
+FIL="$(find linpack_dirs/ -type f | sed 's|linpack_dirs|/usr|g')"  # Create file array for linking
+ILL="$CUR"/"$BNM.inst_log"  # Set installation log location
+SRC="${CUR}/linpack_dirs"  # Set package source linking directory variable
 
 echo "======================================================" > $ILL
 echo " ## Start of '$BNM' Installation Log ## " >> $ILL
@@ -37,7 +37,7 @@ echo "===========================" >> $ILL
 echo " " >> $ILL
 echo " " >> $ILL
 
-mkdir -pv ${DIR[@]} 2>&1 | tee -a $ILL
+mkdir -pv ${DIR[@]} 2>&1 | tee -a $ILL  # Create installation paths if needed
 
 echo " " >> $ILL
 echo " " >> $ILL
@@ -49,9 +49,9 @@ echo " " >> $ILL
 
 for f in ${FIL[@]}; do
 
-        if [ -z "$f" ]; then
+        if [ -z "$f" ]; then  # Check for existing file/symlink
 
-                if [ -f "$f" ]; then
+                if [ -f "$f" ]; then  # Check if it's a file
 
                         echo Installation cannot continue for $f
                         echo $f is already installed from a manual installation outside of linpack
@@ -59,7 +59,7 @@ for f in ${FIL[@]}; do
                         echo linpack now exiting
                         exit 0
 
-                elif [ -h "$f" ]; then
+                elif [ -h "$f" ]; then  # Check if it's a symlink
 
                         echo Installation cannot continue for $f
                         echo $f is already installed by $(stat -c "%U %G" "$f")
@@ -71,7 +71,7 @@ for f in ${FIL[@]}; do
 
         else
                 
-                ln -sv "$SRC"/"$(echo "$f" | sed 's|/usr/||')" "$f" 2>&1 | tee -a $ILL
+                ln -sv "$SRC"/"$(echo "$f" | sed 's|/usr/||')" "$f" 2>&1 | tee -a $ILL  # Link all installation files into place
 
         fi
 
@@ -83,4 +83,4 @@ echo "===========================================================" >> $ILL
 echo " ##  End of '$BNM' linpack_inst logging  ## " >> $ILL
 echo "===========================================================" >> $ILL
 
-exec ./linpack_inst_ext
+exec ./linpack_inst_ext  # Execute any supplemental package installation commands specific to the package
