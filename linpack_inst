@@ -14,7 +14,7 @@
 # initial check to use a 'stat' check- haven't re-checked it since that change. 
 # (thinking was that stat would at least show something to check against an empty return- but i'm tired and don't want 
 # to read anymore tonight- sorry)
-#
+# -NOTE- Luke said 'man test'....   0_o
 #
 
 CUR="$(pwd)"
