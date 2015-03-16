@@ -71,7 +71,7 @@ for f in ${FIL[@]}; do
 
         else
                 
-                ln -sv "$SRC"/"$(echo "$f" | sed 's|/usr||')" "$f" 2>&1 | tee -a $ILL
+                ln -sv "$SRC"/"$(echo "$f" | sed 's|/usr/||')" "$f" 2>&1 | tee -a $ILL
 
         fi
 
