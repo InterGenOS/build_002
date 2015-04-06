@@ -50,7 +50,7 @@ delay_print("${lblue}|${NC}           ${green}Welcome to ${NC}Inter${lblue}Gen${
 print(" ")
 delay_print("${lblue}|                                                           |${NC}")
 print(" ")
-delay_print("${lblue}|${NC}                       ${green}Build${NC}_${green}001${NC}                           ${lblue}|${NC}")
+delay_print("${lblue}|${NC}                       ${green}Build${NC}_${green}002${NC}                           ${lblue}|${NC}")
 print(" ")
 delay_print("${lblue}|                                                           |${NC}")
 print(" ")
