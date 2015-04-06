@@ -34,7 +34,7 @@ cd .. && rm -rf linux-3.19
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -51,7 +51,7 @@ echo "------------------------------------------"
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -71,7 +71,7 @@ cd .. && rm -rf man-pages-3.79 &&
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -88,7 +88,7 @@ echo "------------------------------------------"
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -120,7 +120,7 @@ make check &&
 COUNT=50 # Add some blank lines so glibc make check results
 #          are easier to see in build output
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
 	echo " "
 	let COUNT=COUNT-1
 done
@@ -135,7 +135,7 @@ echo " ---------------------------------- "
 COUNT=50 # Add some blank lines so glibc make check results
 #          are easier to see in build output
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -229,7 +229,7 @@ mkdir -pv /etc/ld.so.conf.d
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -246,7 +246,7 @@ echo "------------------------------------------"
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
-while [ $COUNT -gt 0 ]; do
+while [ "$COUNT" -gt "0" ]; do
         echo " "
         let COUNT=COUNT-1
 done
@@ -282,7 +282,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -293,7 +293,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -319,7 +319,7 @@ ActualB="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log)"
 		COUNT=15 # Add some blank lines so build output
 		#   	   is easier to review
 
-    		while [ $COUNT -gt 0 ]; do
+    		while [ "$COUNT" -gt "0" ]; do
     		echo " "
     		let COUNT=COUNT-1
     		done
@@ -330,7 +330,7 @@ ActualB="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log)"
 		COUNT=15 # Add some blank lines so build output
 		#   	   is easier to review
 
-    		while [ $COUNT -gt 0 ]; do
+    		while [ "$COUNT" -gt "0" ]; do
     		echo " "
     		let COUNT=COUNT-1
     		done
@@ -351,7 +351,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -362,7 +362,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -389,7 +389,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -400,7 +400,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -421,7 +421,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -432,7 +432,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -451,7 +451,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
@@ -462,7 +462,7 @@ else
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
-    while [ $COUNT -gt 0 ]; do
+    while [ "$COUNT" -gt "0" ]; do
     echo " "
     let COUNT=COUNT-1
     done
