@@ -1,5 +1,5 @@
 #!/bin/bash -e
-###  InterGenOS_build_002 build.sh - Builds InterGen packages
+###  InterGenOS_build_002 build_sys.sh - Builds InterGen packages
 ###  Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
 ###  4/5/2015
 
@@ -264,6 +264,337 @@ include /etc/ld.so.conf.d/*.conf
 EOF
 mkdir -pv /etc/ld.so.conf.d
 
-cd .. && rm -rf glibc-2.21 glibc-build &&
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE TOOLCHAIN TESTING      |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
 
-####  File To Be Completed 4/7/15
+
+#############################
+## Adjusting the Toolchain ##
+## ======================= ##
+#############################
+
+
+mv -v /tools/bin/{ld,ld-old}
+mv -v /tools/$(gcc -dumpmachine)/bin/{ld,ld-old}
+mv -v /tools/bin/{ld-new,ld}
+ln -sv /tools/bin/ld /tools/$(gcc -dumpmachine)/bin/ld
+
+gcc -dumpspecs | sed -e 's@/tools@@g'                   \
+    -e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
+    -e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' >      \
+    `dirname $(gcc --print-libgcc-file-name)`/specs
+
+echo 'main(){}' > dummy.c
+cc dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ': /lib'
+
+ExpectedA="Requestingprograminterpreter/lib64/ld-linux-x86-64.so.2"
+ActualA=""$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut -d ']' -f 1 | awk '{print $1$2$3}')"
+
+if [ $Expected != $Actual ]; then
+    echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 1 FAILED!!!!! Halting build, check your work."
+    exit 0
+else
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo "TOOLCHAIN ADJUSTMENT TEST 1 PASSED, CONTINUING TESTS"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+fi
+
+ExpectedB="succeeded"
+ActualB="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log)"
+
+for RESULTS in ${ActualB[@]}; do
+
+	if [ $RESULTS | awk '{print $2}' != $ExpectedB ]; then
+
+		echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 2 FAILED!!!!! Halting build, check your work."
+		exit 0
+
+	else
+
+		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo "TOOLCHAIN ADJUSTMENT TEST 2 PASSED, CONTINUING TESTS"
+		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+    		echo " "
+	fi
+
+ExpectedC="/usr/include"
+ActualC="grep -B1 '^ /usr/include' dummy.log | grep usr"
+
+if [ $ExpectedC != $ActualC ]; then
+    echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 3 FAILED!!!!! Halting build, check your work."
+    exit 0
+else
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo "TOOLCHAIN ADJUSTMENT TEST 3 PASSED, CONTINUING TESTS"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+fi
+
+cat > tlchn_test4.txt << "EOF"
+SEARCH_DIR("/usr/lib")
+SEARCH_DIR("/lib");
+EOF
+
+ExpectedD="$(cat tlchn_test4.txt)"
+ActualD="$(grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g')"
+
+if [ $ExpectedD != $ActualD ]; then
+    echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 4 FAILED!!!!! Halting build, check your work."
+    exit 0
+else
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo "TOOLCHAIN ADJUSTMENT TEST 4 PASSED, CONTINUING TESTS"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+fi
+
+
+ExpectedE="succeeded"
+ActualE="$(grep "/lib.*/libc.so.6 " dummy.log | awk '{print $5}')"
+
+if [ $ExpectedE != $ActualE ]; then
+    echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 5 FAILED!!!!! Halting build, check your work."
+    exit 0
+else
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo "TOOLCHAIN ADJUSTMENT TEST 5 PASSED, CONTINUING TESTS"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+fi
+
+
+ExpectedF="found ld-linux-x86-64.so.2 at /lib64/ld-linux-x86-64.so.2"
+ActualF="$(grep found dummy.log)"
+
+if [ $ExpectedF != $ActualF ]; then
+    echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 6 FAILED!!!!! Halting build, check your work."
+    exit 0
+else
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo "TOOLCHAIN ADJUSTMENT TEST 6 PASSED, CONTINUING TESTS"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+fi
+
+rm -v dummy.c a.out dummy.log
+cd .. && rm -rf glibc-2.21 glibc-build/
+
+
+
