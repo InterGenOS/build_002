@@ -21,6 +21,9 @@
 
     I so love these guys :)
 
+- *** updated kernel to 3.19, and now glibc-2.21 is compiling with ZERO errors.  On to the rest of the basic
+- *** system packages.  :)
+
 - Package separation to be done roughly as:
     
     Core- all required lsb packages
