@@ -110,7 +110,7 @@ make install &&
 cd .. && rm -rf gcc-4.9.2 gcc-build/
 
 
-
+## Updated kernel to 3.19 ###
 #############################
 ## Linux-3.19 API Headers  ##
 ## ======================= ##
