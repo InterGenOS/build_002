@@ -52,6 +52,33 @@ make install &&
 cd .. && rm -rf binutils-2.25 binutils-build/
 
 
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
 ###############
 ## Gcc-4.9.2 ##
 ## ========= ##
@@ -110,6 +137,34 @@ make install &&
 cd .. && rm -rf gcc-4.9.2 gcc-build/
 
 
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ## Updated kernel to 3.19 ###
 #############################
 ## Linux-3.19 API Headers  ##
@@ -122,6 +177,34 @@ make mrproper &&
 make INSTALL_HDR_PATH=dest headers_install &&
 cp -rv dest/include/* /tools/include &&
 cd .. && rm -rf linux-3.19
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
 
 
 
@@ -154,6 +237,35 @@ cd ../glibc-build
 make &&
 make install &&
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE GLIBC SANITY TESTING   |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ##########################
 ## glibc sanity testing ##
 ## ==================== ##
@@ -179,26 +291,57 @@ if [ $Expected != $Actual ]; then
     echo "!!!!!GLIBC 1st PASS SANITY CHECK FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=50 # Add some blank lines so build output
+    #          is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+    
     echo "Compiler and Linker are functioning as expected, continuing build."
+
+    COUNT=50 # Add some blank lines so build output
+    #          is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
 fi
 rm -v dummy.c a.out
 cd .. && rm -rf glibc-2.21 glibc-build/
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 
@@ -227,6 +370,35 @@ cd .. && rm -rf gcc-4.9.2 gcc-build/
 
 
 
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
+
 ####################
 ## Binutils-2.25  ##
 ## =============  ##
@@ -252,6 +424,35 @@ make -C ld clean &&
 make -C ld LIB_PATH=/usr/lib:/lib &&
 cp -v ld/ld-new /tools/bin
 cd .. && rm -rf binutils-2.25 binutils-build/
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
    
 ###############
@@ -302,6 +503,37 @@ make &&
 make install &&
 ln -sv gcc /tools/bin/cc &&
 
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE GLIBC SANITY TESTING   |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
+
 ##########################
 ## glibc sanity testing ##
 ## ==================== ##
@@ -327,26 +559,57 @@ if [ $Expected2 != $Actual2 ]; then
     echo "!!!!!GCC 2nd PASS SANITY CHECK FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=50 # Add some blank lines so build output
+    #          is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+    
     echo "Compiler and Linker are functioning as expected, continuing build."
+
+    COUNT=50 # Add some blank lines so build output
+    #          is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
 fi
 rm -v dummy.c a.out
 cd .. && rm -rf gcc-4.9.2 gcc-build/
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 ###############
@@ -366,6 +629,35 @@ ln -sv tclsh8.6 /tools/bin/tclsh
 cd .. && cd .. && rm -rf tcl8.6.3
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 #################
 ## Expect-5.45 ##
 ## =========== ##
@@ -383,6 +675,35 @@ make SCRIPTS="" install
 cd .. && rm -rf expect5.45
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ###################
 ## DejaGNU-1.5.2 ##
 ## ============= ##
@@ -392,6 +713,35 @@ tar xf dejagnu-1.5.2.tar.gz &&
 cd dejagnu-1.5.2/
 ./configure --prefix=/tools && make install
 cd .. && rm -rf dejagnu-1.5.2
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 ##################
@@ -405,6 +755,35 @@ PKG_CONFIG= ./configure --prefix=/tools &&
 make &&
 make install
 cd .. && rm -rf check-0.9.14
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 #################
@@ -425,6 +804,36 @@ make install
 cd .. && rm -rf ncurses-5.9
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
+
 #################
 ## Bash-4.3.30 ##
 ## =========== ##
@@ -439,6 +848,35 @@ ln -sv bash /tools/bin/sh
 cd .. && rm -rf bash-4.3.30
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 #################
 ## Bzip2-1.0.6 ##
 ## =========== ##
@@ -448,6 +886,36 @@ tar xf bzip2-1.0.6.tar.gz &&
 cd bzip2-1.0.6/
 make && make PREFIX=/tools install &&
 cd .. && rm -rf bzip2-1.0.6
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
 
 
 ####################
@@ -463,6 +931,35 @@ make install &&
 cd .. && rm -rf coreutils-8.23
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ###################
 ## Diffutils-3.3 ##
 ## ============= ##
@@ -472,6 +969,37 @@ tar xf diffutils-3.3.tar.xz &&
 cd diffutils-3.3/
 ./configure --prefix=/tools && make && make install
 cd .. && rm -rf diffutils-3.3
+
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
 
 
 ###############
@@ -485,6 +1013,36 @@ cd file-5.22/
 cd .. && rm -rf file-5.22
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
+
 #####################
 ## Findutils-4.4.2 ##
 ## =============== ##
@@ -496,6 +1054,35 @@ cd findutils-4.4.2/
 cd .. && rm -rf findutils-4.4.2
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ################
 ## Gawk-4.1.1 ##
 ## ========== ##
@@ -505,6 +1092,35 @@ tar xf gawk-4.1.1.tar.xz &&
 cd gawk-4.1.1/
 ./configure --prefix=/tools && make && make install &&
 cd .. && rm -rf gawk-4.1.1
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 ####################
@@ -525,6 +1141,35 @@ cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin
 cd .. && cd .. && rm -rf gettext-0.19.4
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ###############
 ## Grep-2.21 ##
 ## ========= ##
@@ -534,6 +1179,35 @@ tar xf grep-2.21.tar.xz &&
 cd grep-2.21/
 ./configure --prefix=/tools && make && make install &&
 cd .. && rm -rf grep-2.21
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 ##############
@@ -547,6 +1221,35 @@ cd gzip-1.6/
 cd .. && rm -rf gzip-1.6
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ###############
 ## M4-1.4.17 ##
 ## ========= ##
@@ -556,6 +1259,35 @@ tar xf m4-1.4.17.tar.xz &&
 cd m4-1.4.17/
 ./configure --prefix=/tools && make && make install &&
 cd .. && rm -rf 4-1.4.17
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 ##############
@@ -569,6 +1301,35 @@ cd make-4.1/
 cd .. && rm -rf make-4.1
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 #################
 ## Patch-2.7.4 ##
 ## =========== ##
@@ -578,6 +1339,35 @@ tar xf patch-2.7.4.tar.xz &&
 cd patch-2.7.4/
 ./configure --prefix=/tools && make && make install &&
 cd .. && rm -rf patch-2.7.4
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 #################
@@ -595,6 +1385,35 @@ cp -Rv lib/* /tools/lib/perl5/5.20.2
 cd .. && rm -rf perl-5.20.2
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ###############
 ## Sed-4.2.2 ##
 ## ========= ##
@@ -604,6 +1423,35 @@ tar xf sed-4.2.2.tar.bz2 &&
 cd sed-4.2.2/
 ./configure --prefix=/tools && make && make install &&
 cd .. && rm -rf sed-4.2.2
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 ##############
@@ -617,6 +1465,35 @@ cd tar-1.28/
 cd .. && rm -rf tar-1.28
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 #################
 ## Texinfo-5.2 ##
 ## =========== ##
@@ -626,6 +1503,35 @@ tar xf texinfo-5.2.tar.xz &&
 cd texinfo-5.2/
 ./configure --prefix=/tools && make && make install &&
 cd .. && rm -rf texinfo-5.2
+
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 
 
 #####################
@@ -645,6 +1551,35 @@ make install
 cd .. && rm -rf util-linux-2.26
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 ##############
 ## Xz-5.2.0 ##
 ## ======== ##
@@ -658,6 +1593,35 @@ make install
 cd .. && rm -rf xz-5.2.0
 
 
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 #####################
 ####             ####
 ####  STRIPPING  ####
@@ -668,9 +1632,15 @@ strip --strip-debug /tools/lib/* &&
 /usr/bin/strip --strip-unneeded /tools/{,s}bin/* &&
 rm -rf /tools/{,share}/{info,man,doc} &&
 
-echo " "
-echo " "
-echo " "
+COUNT=10 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 echo "==================================================================================="
 echo "|                                                                                 |"
 echo "|                        Temporary System Build Completed                         |"
@@ -685,12 +1655,18 @@ echo "|                        Please 'exit' back into root shell               
 echo "|                            and then copy/paste and run                          |"
 echo "|                        the following command to continue:                       |"
 echo "|                                                                                 |"
-echo "|                             "\$IGos"/./setup_chroot.sh                             |"
+echo "|                             \$IGos/./setup_chroot.sh                             |"
 echo "|                                                                                 |"
 echo "|                                  InterGen OSsD                                  |"
 echo "|                                       2015                                      |"
 echo "|                                                                                 |"
 echo "==================================================================================="
-echo " "
-echo " "
-echo " "
+
+COUNT=5 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
