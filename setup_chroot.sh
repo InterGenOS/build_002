@@ -29,8 +29,7 @@ fi
 
 ## End chroot setup
 
-wget https://raw.githubusercontent.com/InterGenOS/build_002/master/setup_structure.sh 
--P $IGos
+wget https://raw.githubusercontent.com/InterGenOS/build_002/master/setup_structure.sh -P $IGos
 wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build.sh -P $IGos
 
 echo " "
