@@ -273,9 +273,9 @@ echo 'main(){}' > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log
 
 ExpectedA="Requestingprograminterpreter/lib64/ld-linux-x86-64.so.2"
-ActualA="$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut -d ']' -f 1 | awk '{print $1$2$3}')"
+ActualA="$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut -d ']' -f 1 | awk '{print $1$2$3$4}')"
 
-if [ $Expected != $Actual ]; then
+if [ "$ExpectedA" != "$ActualA" ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 1 FAILED!!!!! Halting build, check your work."
     exit 0
 else
@@ -300,17 +300,21 @@ else
     unset COUNT
 fi
 
-ExpectedB="succeeded"
+cat > tlchn_test2.txt << "EOF"
+/usr/lib/../lib64/crt1.o succeeded
+/usr/lib/../lib64/crti.o succeeded
+/usr/lib/../lib64/crtn.o succeeded
+EOF
+
+ExpectedB="$(cat tlchn_test2.txt)"
 ActualB="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log)"
 
-for RESULTS in ${ActualB[@]}; do
+        if [ "$ActualB" != "$ExpectedB" ]; then
 
-	if [ $RESULTS | awk '{print $2}' != $ExpectedB ]; then
+                echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 2 FAILED!!!!! Halting build, check your work."
+                exit 0
 
-		echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 2 FAILED!!!!! Halting build, check your work."
-		exit 0
-
-	else
+        else
 
 		COUNT=15 # Add some blank lines so build output
 		#   	   is easier to review
@@ -333,13 +337,17 @@ for RESULTS in ${ActualB[@]}; do
     		unset COUNT
 	fi
 
-ExpectedC="/usr/include"
-ActualC="grep -B1 '^ /usr/include' dummy.log | grep usr"
+rm tlchn_test2.txt
 
-if [ $ExpectedC != $ActualC ]; then
+ExpectedC="/usr/include"
+ActualC="$(grep -B1 '^ /usr/include' dummy.log | grep usr | awk '{print $1}')"
+
+if [ "$ExpectedC" != "$ActualC" ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 3 FAILED!!!!! Halting build, check your work."
     exit 0
+
 else
+
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
@@ -363,17 +371,21 @@ else
 fi
 
 cat > tlchn_test4.txt << "EOF"
+SEARCH_DIR("=/tools/x86_64-unknown-linux-gnu/lib64")
 SEARCH_DIR("/usr/lib")
-SEARCH_DIR("/lib");
+SEARCH_DIR("/lib")
+SEARCH_DIR("=/tools/x86_64-unknown-linux-gnu/lib");
 EOF
 
 ExpectedD="$(cat tlchn_test4.txt)"
 ActualD="$(grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g')"
 
-if [ $ExpectedD != $ActualD ]; then
+if [ "$ExpectedD" != "$ActualD" ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 4 FAILED!!!!! Halting build, check your work."
     exit 0
+
 else
+
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
@@ -395,14 +407,17 @@ else
     unset COUNT
 fi
 
+rm tlchn_test4.txt
 
 ExpectedE="succeeded"
 ActualE="$(grep "/lib.*/libc.so.6 " dummy.log | awk '{print $5}')"
 
-if [ $ExpectedE != $ActualE ]; then
+if [ "$ExpectedE" != "$ActualE" ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 5 FAILED!!!!! Halting build, check your work."
     exit 0
+
 else
+
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
@@ -424,14 +439,15 @@ else
     unset COUNT
 fi
 
-
 ExpectedF="found ld-linux-x86-64.so.2 at /lib64/ld-linux-x86-64.so.2"
 ActualF="$(grep found dummy.log)"
 
-if [ $ExpectedF != $ActualF ]; then
+if [ "$ExpectedF" != "$ActualF" ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 6 FAILED!!!!! Halting build, check your work."
     exit 0
+
 else
+
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
@@ -456,5 +472,4 @@ fi
 rm -v dummy.c a.out dummy.log
 cd .. && rm -rf glibc-2.21 glibc-build/
 
-
-
+echo ok working for now!
