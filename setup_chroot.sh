@@ -35,10 +35,15 @@ wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys.sh 
 chmod +x $IGos/setup_structure.sh
 chmod +x $IGos/build_sys.sh
 
-echo " "
-echo " "
-echo " "
-echo " "
+COUNT=10 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 echo "----------------------------------------------------------"
 echo "                                                        "
 echo "  Copy and paste the following command to enter chroot  "
@@ -58,7 +63,12 @@ echo "  /tools/bin/bash setup_structure.sh                    "
 echo "                                                        "
 echo "  in the chroot environment                             "
 echo "----------------------------------------------------------"
-echo " "
-echo " "
-echo " "
-echo " "
+
+COUNT=5 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
