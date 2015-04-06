@@ -85,21 +85,34 @@ EOF
 
 ## End core system structure setup
 
-echo " "
-echo " "
-echo " "
-echo " "
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 echo "-------------------------------------------"
 echo "|                                         |"
-echo "|  Copy and paste the following command   |"
-echo "|  to run 'login' and set prompt to root  |"
+echo "|  Copy/paste and run the following       |"
+echo "|  command to run 'login' and set         |"
+echo "|  prompt to new root prompt              |"
 echo "|                                         |"
 echo "|  exec /tools/bin/bash --login +h        |"
 echo "|                                         |"
-echo "|  Then run /tools/bin/bash build.sh      |"
+echo "|  Then copy/paste and run                |"
+echo "|                                         |"
+echo "|  /tools/bin/bash build_sys.sh           |"
 echo "|                                         |"
 echo "-------------------------------------------"
-echo " "
-echo " "
-echo " "
-echo " "
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
