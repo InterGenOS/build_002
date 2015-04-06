@@ -271,10 +271,9 @@ gcc -dumpspecs | sed -e 's@/tools@@g'                   \
 
 echo 'main(){}' > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log
-readelf -l a.out | grep ': /lib'
 
 ExpectedA="Requestingprograminterpreter/lib64/ld-linux-x86-64.so.2"
-ActualA=""$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut -d ']' -f 1 | awk '{print $1$2$3}')"
+ActualA="$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut -d ']' -f 1 | awk '{print $1$2$3}')"
 
 if [ $Expected != $Actual ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 1 FAILED!!!!! Halting build, check your work."
