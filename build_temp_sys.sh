@@ -9,7 +9,7 @@
 
 cd /mnt/igos
 
-sed -i '/.\/build_temp_sys.sh/d' /home/igos/.bashrc # Removes bashrc entry that auto-runs the temp-system build on login
+sed -i '/.\/build_temp_sys.sh/d' /home/igos/.bashrc # Removes bashrc entry that auto-runs the temp-system build
 
 cd /mnt/igos/sources
 
