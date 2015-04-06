@@ -31,24 +31,15 @@ cp -rv dest/include/* /usr/include
 cd .. && rm -rf linux-3.19
 
 
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 echo "------------------------------------------"
 echo "|                                        |"
 echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
@@ -56,26 +47,15 @@ echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
 echo "|  OUTPUT                                |"
 echo "|                                        |"
 echo "------------------------------------------"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
 
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
 
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
 
 ####################
 ## man-pages-3.79 ##
@@ -88,25 +68,15 @@ make install &&
 cd .. && rm -rf man-pages-3.79 &&
 
 
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
 
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 echo "------------------------------------------"
 echo "|                                        |"
 echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
@@ -114,24 +84,15 @@ echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
 echo "|  OUTPUT                                |"
 echo "|                                        |"
 echo "------------------------------------------"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
 
 
 ################
@@ -156,13 +117,14 @@ cd ../glibc-build
 make &&
 make check &&
 
-COUNTA=50 # Add some blank lines so glibc make check results
+COUNT=50 # Add some blank lines so glibc make check results
 #          are easier to see in build output
 
-while [ $COUNTA -gt 0 ]; do
+while [ $COUNT -gt 0 ]; do
 	echo " "
-	let COUNTA=COUNTA-1
+	let COUNT=COUNT-1
 done
+unset COUNT
 
 echo " ---------------------------------- "
 echo " "
@@ -170,14 +132,14 @@ echo " GLIBC MAKE CHECK RESULTS ARE ABOVE "
 echo " "
 echo " ---------------------------------- "
 
-
-COUNTB=50 # Add some blank lines so glibc make check results
+COUNT=50 # Add some blank lines so glibc make check results
 #          are easier to see in build output
 
-while [ $COUNTB -gt 0 ]; do
+while [ $COUNT -gt 0 ]; do
         echo " "
-        let COUNTB=COUNTB-1
+        let COUNT=COUNT-1
 done
+unset COUNT
 
 touch /etc/ld.so.conf # the install stage of Glibc will complain about 
 #                       the absence of /etc/ld.so.conf. Touching the 
@@ -264,24 +226,15 @@ include /etc/ld.so.conf.d/*.conf
 EOF
 mkdir -pv /etc/ld.so.conf.d
 
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
 echo "------------------------------------------"
 echo "|                                        |"
 echo "|  SPACING BEFORE TOOLCHAIN TESTING      |"
@@ -289,24 +242,15 @@ echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
 echo "|  OUTPUT                                |"
 echo "|                                        |"
 echo "------------------------------------------"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ $COUNT -gt 0 ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
 
 
 #############################
@@ -336,39 +280,25 @@ if [ $Expected != $Actual ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 1 FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+    
     echo "TOOLCHAIN ADJUSTMENT TEST 1 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
 fi
 
 ExpectedB="succeeded"
@@ -383,39 +313,25 @@ for RESULTS in ${ActualB[@]}; do
 
 	else
 
-		echo " "
+		COUNT=15 # Add some blank lines so build output
+		#   is easier to review
+
+    		while [ $COUNT -gt 0 ]; do
     		echo " "
+    		let COUNT=COUNT-1
+    		done
+    		unset COUNT
+    		
+		echo "TOOLCHAIN ADJUSTMENT TEST 2 PASSED, CONTINUING TESTS"
+	
+		COUNT=15 # Add some blank lines so build output
+		#   is easier to review
+
+    		while [ $COUNT -gt 0 ]; do
     		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo "TOOLCHAIN ADJUSTMENT TEST 2 PASSED, CONTINUING TESTS"
-		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
-    		echo " "
+    		let COUNT=COUNT-1
+    		done
+    		unset COUNT
 	fi
 
 ExpectedC="/usr/include"
@@ -425,39 +341,26 @@ if [ $ExpectedC != $ActualC ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 3 FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
     echo "TOOLCHAIN ADJUSTMENT TEST 3 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
 fi
 
 cat > tlchn_test4.txt << "EOF"
@@ -472,39 +375,25 @@ if [ $ExpectedD != $ActualD ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 4 FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
     echo "TOOLCHAIN ADJUSTMENT TEST 4 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
 fi
 
 
@@ -515,39 +404,25 @@ if [ $ExpectedE != $ActualE ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 5 FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
     echo "TOOLCHAIN ADJUSTMENT TEST 5 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
 fi
 
 
@@ -558,39 +433,25 @@ if [ $ExpectedF != $ActualF ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 6 FAILED!!!!! Halting build, check your work."
     exit 0
 else
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
     echo "TOOLCHAIN ADJUSTMENT TEST 6 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   is easier to review
+
+    while [ $COUNT -gt 0 ]; do
     echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
-    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
 fi
 
 rm -v dummy.c a.out dummy.log
