@@ -457,7 +457,7 @@ else
     done
     unset COUNT
 
-    echo "TOOLCHAIN ADJUSTMENT TEST 6 PASSED, CONTINUING TESTS"
+    echo "TOOLCHAIN ADJUSTMENT TEST 6 PASSED, CONTINUING BUILD"
 
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
@@ -472,4 +472,71 @@ fi
 rm -v dummy.c a.out dummy.log
 cd .. && rm -rf glibc-2.21 glibc-build/
 
-echo ok working for now!
+echo ok all designated builds completed
+
+### remaining packages to be added as testing finishes
+###
+### packages in testing as of 4/6/2015:
+###
+### Zlib-1.2.8
+### File-5.22
+### Binutils-2.25
+### GMP-6.0.0a
+### MPFR-3.1.2
+### MPC-1.0.2
+### GCC-4.9.2
+### Bzip2-1.0.6
+### Pkg-config-0.28
+### Ncurses-5.9
+### Attr-2.4.47
+### Acl-2.2.52
+### Libcap-2.24
+### Sed-4.2.2
+### Shadow-4.2.1
+### Psmisc-22.21
+### Procps-ng-3.3.10
+### E2fsprogs-1.42.12
+### Coreutils-8.23
+### Iana-Etc-2.30
+### M4-1.4.17
+### Flex-2.5.39
+### Bison-3.0.4
+### Grep-2.21
+### Readline-6.3
+### Bash-4.3.30
+### Bc-1.06.95
+### Libtool-2.4.6
+### GDBM-1.11
+### Expat-2.1.0
+### Inetutils-1.9.2
+### Perl-5.20.2
+### XML::Parser-2.44
+### Autoconf-2.69
+### Automake-1.15
+### Diffutils-3.3
+### Gawk-4.1.1
+### Findutils-4.4.2
+### Gettext-0.19.4
+### Intltool-0.50.2
+### Gperf-3.0.4
+### Groff-1.22.3
+### Xz-5.2.0
+### GRUB-2.02~beta2
+### Less-458
+### Gzip-1.6
+### IPRoute2-3.19.0
+### Kbd-2.0.2
+### Kmod-19
+### Libpipeline-1.4.0
+### Make-4.1
+### Patch-2.7.4
+### Systemd-219
+### D-Bus-1.8.16
+### Util-linux-2.26
+### Man-DB-2.7.1
+### Tar-1.28
+### Texinfo-5.2
+### Vim-7.4
+### Nano-2.26
+###
+### 
