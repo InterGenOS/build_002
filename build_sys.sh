@@ -281,7 +281,7 @@ if [ $Expected != $Actual ]; then
     exit 0
 else
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -292,7 +292,7 @@ else
     echo "TOOLCHAIN ADJUSTMENT TEST 1 PASSED, CONTINUING TESTS"
 
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -314,7 +314,7 @@ for RESULTS in ${ActualB[@]}; do
 	else
 
 		COUNT=15 # Add some blank lines so build output
-		#   is easier to review
+		#   	   is easier to review
 
     		while [ $COUNT -gt 0 ]; do
     		echo " "
@@ -325,7 +325,7 @@ for RESULTS in ${ActualB[@]}; do
 		echo "TOOLCHAIN ADJUSTMENT TEST 2 PASSED, CONTINUING TESTS"
 	
 		COUNT=15 # Add some blank lines so build output
-		#   is easier to review
+		#   	   is easier to review
 
     		while [ $COUNT -gt 0 ]; do
     		echo " "
@@ -342,7 +342,7 @@ if [ $ExpectedC != $ActualC ]; then
     exit 0
 else
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -353,7 +353,7 @@ else
     echo "TOOLCHAIN ADJUSTMENT TEST 3 PASSED, CONTINUING TESTS"
 
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -376,7 +376,7 @@ if [ $ExpectedD != $ActualD ]; then
     exit 0
 else
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -387,7 +387,7 @@ else
     echo "TOOLCHAIN ADJUSTMENT TEST 4 PASSED, CONTINUING TESTS"
 
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -405,7 +405,7 @@ if [ $ExpectedE != $ActualE ]; then
     exit 0
 else
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -416,7 +416,7 @@ else
     echo "TOOLCHAIN ADJUSTMENT TEST 5 PASSED, CONTINUING TESTS"
 
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -434,7 +434,7 @@ if [ $ExpectedF != $ActualF ]; then
     exit 0
 else
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
@@ -445,7 +445,7 @@ else
     echo "TOOLCHAIN ADJUSTMENT TEST 6 PASSED, CONTINUING TESTS"
 
     COUNT=15 # Add some blank lines so build output
-#   is easier to review
+#   	       is easier to review
 
     while [ $COUNT -gt 0 ]; do
     echo " "
