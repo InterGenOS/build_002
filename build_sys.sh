@@ -472,13 +472,62 @@ fi
 rm -v dummy.c a.out dummy.log
 cd .. && rm -rf glibc-2.21 glibc-build/
 
+
+################
+## Zlib-1.2.8 ##
+## ========== ##
+################
+
+
+tar xf zlib-1.2.8.tar.xz &&
+cd zlib-1.2.8
+./configure --prefix=/usr &&
+make &&
+make check > /zlib-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make install &&
+mv -v /usr/lib/libz.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+cd .. && rm -rf zlib-1.2.8
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE TOOLCHAIN TESTING      |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+###############
+## File-5.22 ##
+## ========= ##
+###############
+
 echo ok all designated builds completed
 
 ### remaining packages to be added as testing finishes
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### Zlib-1.2.8
 ### File-5.22
 ### Binutils-2.25
 ### GMP-6.0.0a
