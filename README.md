@@ -197,4 +197,4 @@ if the host machine has less than 6GB of physical RAM.
 ---
 ##<center>Ready to build???</center>
 
-###<center>Run the setup.sh script as user 'root'<center>
+###<center>Run the setup_build.sh script as user 'root'<center>
