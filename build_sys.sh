@@ -501,7 +501,7 @@ unset COUNT
 
 echo "------------------------------------------"
 echo "|                                        |"
-echo "|  SPACING BEFORE TOOLCHAIN TESTING      |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
 echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
 echo "|  OUTPUT                                |"
 echo "|                                        |"
