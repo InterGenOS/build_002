@@ -115,7 +115,7 @@ cd ../glibc-build
     --enable-obsolete-rpc  \
     --with-pkgversion='InterGenOS GNU/Linux glibc build002'
 make &&
-make check >> glibc-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make check 2>&1 | tee /glibc-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 COUNT=50 # Add some blank lines so glibc make check results
 #          are easier to see in build output
@@ -483,7 +483,7 @@ tar xf zlib-1.2.8.tar.xz &&
 cd zlib-1.2.8
 ./configure --prefix=/usr &&
 make &&
-make check >> /zlib-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make check 2>&1 | tee /zlib-mkck-log_$(date +"%m-%d-%Y_%T") &&
 make install &&
 mv -v /usr/lib/libz.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
@@ -527,7 +527,7 @@ tar xf file-5.22.tar.gz &&
 cd file-5.22
 ./configure --prefix=/usr &&
 make &&
-make check >> file-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make check 2>&1 | tee /file-mkck-log_$(date +"%m-%d-%Y_%T") &&
 make install &&
 cd .. && rm -rf file-5.22
 
@@ -559,6 +559,363 @@ done
 unset COUNT
 
 
+###################
+## Binutils-2.25 ##
+## ============= ##
+###################
+
+
+tar xf binutils-2.25.tar.bz2 &&
+cd binutils-2.25
+
+
+###############
+## PTY check ##
+## ========= ##
+###############
+
+
+ExpectedG="spawn ls"
+ActualG="$(expect -c "spawn ls")"
+
+if [ "$ExpectedG" != "$ActualG" ]; then
+    echo "!!!!!PTY Check FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "PTY Check PASSED, CONTINUING BUILD"
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+mkdir -v ../binutils-build
+cd ../binutils-build
+
+../binutils-2.25/configure --prefix=/usr   \
+                           --enable-shared \
+                           --disable-werror &&
+
+make tooldir=/usr &&
+
+make -k check 2>&1 | tee /binutils-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make tooldir=/usr install &&
+
+cd .. && rm -rf binutils-2.25 binutils-build/
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+################
+## GMP-6.0.0a ##
+## ========== ##
+################
+
+
+tar xf gmp-6.0.0a.tar.xz &&
+cd gmp-6.0.0
+
+./configure --prefix=/usr \
+            --enable-cxx  \
+            --docdir=/usr/share/doc/gmp-6.0.0a &&
+
+make &&
+make html &&
+
+make check 2>&1 | tee /gmp-check-logA_$(date +"%m-%d-%Y_%T") &&
+awk '/tests passed/{total+=$2} ; END{print total}' /gmp-check-logA_* >> /gmp-check-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+make install-html &&
+
+cd .. && rm -rf gmp-6.0.0
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+################
+## MPFR-3.1.2 ##
+## ========== ##
+################
+
+
+tar xf mpfr-3.1.2.tar.xz &&
+cd mpfr-3.1.2
+
+patch -Np1 -i ../mpfr-3.1.2-upstream_fixes-3.patch &&
+
+./configure --prefix=/usr        \
+            --enable-thread-safe \
+            --docdir=/usr/share/doc/mpfr-3.1.2 &&
+
+make &&
+make html &&
+
+make check 2>&1 | tee /mpfr-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+make install-html &&
+
+cd .. && rm -rf mpfr-3.1.2
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+###############
+## MPC-1.0.2 ##
+## ========= ##
+###############
+
+
+tar xf mpc-1.0.2.tar.gz &&
+cd mpc-1.0.2
+
+./configure --prefix=/usr --docdir=/usr/share/doc/mpc-1.0.2 &&
+
+make &&
+make html &&
+
+make check 2>&1 | tee /mpc-mkck-log_$(date +"%m-%d-%Y_%T")
+
+make install &&
+make install-html &&
+
+cd .. && rm -rf mpc-1.0.2
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+###############
+## GCC-4.9.2 ##
+## ========= ##
+###############
+
+
+tar xf gcc-4.9.2.tar.bz2 &&
+cd gcc-4.9.2/
+
+mkdir -v ../gcc-build
+cd ../gcc-build
+
+SED=sed                       \
+../gcc-4.9.2/configure        \
+     --prefix=/usr            \
+     --enable-languages=c,c++ \
+     --disable-multilib       \
+     --disable-bootstrap      \
+     --with-system-zlib &&
+
+make &&
+
+ulimit -s 32768
+
+make -k check 2>&1 | tee /gcc-mkck-logA_$(date +"%m-%d-%Y_%T") &&
+../gcc-4.9.2/contrib/test_summary | grep -A7 Summ >> /gcc-mkck-logB_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+ln -sv ../usr/bin/cpp /lib
+
+ln -sv gcc /usr/bin/cc
+
+install -v -dm755 /usr/lib/bfd-plugins &&
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/4.9.2/liblto_plugin.so /usr/lib/bfd-plugins/
+
+
+###########################
+## Testing the Toolchain ##
+## ===================== ##
+###########################
+
+
+echo 'main(){}' > dummy.c
+cc dummy.c -v -Wl,--verbose &> dummy.log
+
+ExpectedH="Requestingprograminterpreter/lib64/ld-linux-x86-64.so.2"
+ActualH="$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut -d ']' -f 1 | awk '{print $1$2$3$4}')"
+
+if [ "$ExpectedH" != "$ActualH" ]; then
+    echo "!!!!!TOOLCHAIN TEST 1 FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#   	       is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "TOOLCHAIN TEST 1 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+fi
+
+cat > tlchn_test2.txt << "EOF"
+succeeded
+succeeded
+succeeded
+EOF
+
+ExpectedI="$(cat tlchn_test2.txt)"
+ActualI="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log | awk '{print $2}')"
+
+if [ "$ExpectedI" != "$ActualI" ]; then
+
+    echo "!!!!!TOOLCHAIN TEST 2 FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "TOOLCHAIN TEST 2 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+fi
+
+rm -rf tlchn_test2.txt
+
 
 echo ok all designated builds completed
 
@@ -566,10 +923,6 @@ echo ok all designated builds completed
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### Binutils-2.25
-### GMP-6.0.0a
-### MPFR-3.1.2
-### MPC-1.0.2
 ### GCC-4.9.2
 ### Bzip2-1.0.6
 ### Pkg-config-0.28
