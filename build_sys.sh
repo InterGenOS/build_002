@@ -603,6 +603,7 @@ else
     let COUNT=COUNT-1
     done
     unset COUNT
+fi
 
 mkdir -v ../binutils-build
 cd ../binutils-build
@@ -663,8 +664,8 @@ cd gmp-6.0.0
 make &&
 make html &&
 
-make check 2>&1 | tee /gmp-check-logA_$(date +"%m-%d-%Y_%T") &&
-awk '/tests passed/{total+=$2} ; END{print total}' /gmp-check-logA_* >> /gmp-check-log_$(date +"%m-%d-%Y_%T") &&
+make check 2>&1 | tee /gmp-check-logA &&
+awk '/tests passed/{total+=$2} ; END{print total}' /gmp-check-logA >> /gmp-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 make install &&
 make install-html &&
