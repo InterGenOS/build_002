@@ -115,7 +115,7 @@ cd ../glibc-build
     --enable-obsolete-rpc  \
     --with-pkgversion='InterGenOS GNU/Linux glibc build002'
 make &&
-make check &&
+make check >> glibc-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 COUNT=50 # Add some blank lines so glibc make check results
 #          are easier to see in build output
@@ -522,13 +522,50 @@ unset COUNT
 ## ========= ##
 ###############
 
+
+tar xf file-5.22.tar.gz &&
+cd file-5.22
+./configure --prefix=/usr &&
+make &&
+make check >> file-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make install &&
+cd .. && rm -rf file-5.22
+
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+echo "------------------------------------------"
+echo "|                                        |"
+echo "|  SPACING BEFORE STARTING NEXT PACKAGE  |"
+echo "|  ALLOWS FOR EASIER REVIEW OF BUILD     |"
+echo "|  OUTPUT                                |"
+echo "|                                        |"
+echo "------------------------------------------"
+
+COUNT=15 # Add some blank lines so build output
+#          is easier to review
+
+while [ "$COUNT" -gt "0" ]; do
+        echo " "
+        let COUNT=COUNT-1
+done
+unset COUNT
+
+
+
 echo ok all designated builds completed
 
 ### remaining packages to be added as testing finishes
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### File-5.22
 ### Binutils-2.25
 ### GMP-6.0.0a
 ### MPFR-3.1.2
