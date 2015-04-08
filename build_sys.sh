@@ -607,7 +607,7 @@ cd binutils-2.25
 ###############
 
 
-ExpectedG="spawn ls"
+ExpectedG="$(echo 'spawn ls')"
 ActualG="$(expect -c "spawn ls")"
 
 if [ "$ExpectedG" != "$ActualG" ]; then
@@ -952,8 +952,90 @@ else
     unset COUNT
 fi
 
-rm -rf tlchn_test2.txt
+rm -rf tlchn_test3.txt
 
+cat > tlchn_test3.txt << "EOF"
+#include <...> search starts here:
+ /usr/lib64/gcc/x86_64-unkown-linux-gnu/4.9.2/include
+ /usr/local/include
+ /usr/lib64/gcc/x86_64-unkown-linux-gnu/4.9.2/include-fixed
+ /usr/include
+EOF
+
+ExpectedJ="$(cat tlchn_test3.txt)"
+ActualJ="$(grep -B4 '^ /usr/include' dummy.log)"
+
+if [ "$ExpectedJ" != "$ActualJ" ]; then
+    echo "!!!!!TOOLCHAIN TEST 3 FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#   	       is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "TOOLCHAIN TEST 3 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   	       is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+fi
+
+rm tlchn_test3.txt
+
+cat > tlchn_test4.txt << "EOF"
+SEARCH_DIR("/usr/x86_64-unknown-linux-gnu/lib64")
+SEARCH_DIR("/usr/local/lib64")
+SEARCH_DIR("/lib64")
+SEARCH_DIR("/usr/lib64")
+SEARCH_DIR("/usr/x86_64-unknown-linux-gnu/lib")
+SEARCH_DIR("/usr/local/lib")
+SEARCH_DIR("/lib")
+SEARCH_DIR("/usr/lib");
+EOF
+
+ExpectedK="$(cat tlchn_test4.txt)"
+ActualK="$(grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g')"
+
+if [ "$ExpectedK" != "$ActualK" ]; then
+    echo "!!!!!TOOLCHAIN TEST 4 FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#   	       is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "TOOLCHAIN TEST 4 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#   	       is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+fi
+
+rm tlchn_test4.txt
 
 
 
