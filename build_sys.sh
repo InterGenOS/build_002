@@ -117,7 +117,7 @@ cd ../glibc-build
 make &&
 make check 2>&1 | tee /glibc-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
-COUNT=50 # Add some blank lines so glibc make check results
+COUNT=15 # Add some blank lines so glibc make check results
 #          are easier to see in build output
 
 while [ "$COUNT" -gt "0" ]; do
@@ -132,7 +132,7 @@ echo " GLIBC MAKE CHECK RESULTS ARE ABOVE "
 echo " "
 echo " ---------------------------------- "
 
-COUNT=50 # Add some blank lines so glibc make check results
+COUNT=15 # Add some blank lines so glibc make check results
 #          are easier to see in build output
 
 while [ "$COUNT" -gt "0" ]; do
