@@ -606,8 +606,11 @@ cd binutils-2.25
 ## ========= ##
 ###############
 
+cat > pty_test.txt << "EOF"
+spawn ls
+EOF
 
-ExpectedG="$(echo 'spawn ls')"
+ExpectedG="$(cat pty_test.txt)"
 ActualG="$(expect -c "spawn ls")"
 
 if [ "$ExpectedG" != "$ActualG" ]; then
