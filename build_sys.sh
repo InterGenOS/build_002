@@ -22,14 +22,18 @@ cd /sources
 ## ======================= ##
 #############################
 
+
 tar xf linux-3.19.tar.xz &&
 cd linux-3.19/
+
 make mrproper &&
+
 make INSTALL_HDR_PATH=dest headers_install &&
+
 find dest/include \( -name .install -o -name ..install.cmd \) -delete
 cp -rv dest/include/* /usr/include
-cd .. && rm -rf linux-3.19
 
+cd .. && rm -rf linux-3.19
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -57,16 +61,19 @@ while [ "$COUNT" -gt "0" ]; do
 done
 unset COUNT
 
+
 ####################
 ## man-pages-3.79 ##
 ## ============== ##
 ####################
 
+
 tar xf man-pages-3.79.tar.xz &&
 cd man-pages-3.79
-make install &&
-cd .. && rm -rf man-pages-3.79 &&
 
+make install &&
+
+cd .. && rm -rf man-pages-3.79 &&
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -100,21 +107,28 @@ unset COUNT
 ## ========== ##
 ################
 
+
 tar xf glibc-2.21.tar.xz &&
 cd glibc-2.21
+
 patch -Np1 -i ../glibc-2.21-fhs-1.patch &&
+
 sed -e '/ia32/s/^/1:/' \
     -e '/SSE2/s/^1://' \
     -i  sysdeps/i386/i686/multiarch/mempcpy_chk.S &&
+
 mkdir -v ../glibc-build
 cd ../glibc-build
+
 ../glibc-2.21/configure    \
     --prefix=/usr          \
     --disable-profile      \
     --enable-kernel=2.6.32 \
     --enable-obsolete-rpc  \
     --with-pkgversion='InterGenOS GNU/Linux glibc build002'
+
 make &&
+
 make check 2>&1 | tee /glibc-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 COUNT=15 # Add some blank lines so glibc make check results
@@ -148,12 +162,14 @@ touch /etc/ld.so.conf # the install stage of Glibc will complain about
 make install &&
 
 cp -v ../glibc-2.21/nscd/nscd.conf /etc/nscd.conf
+
 mkdir -pv /var/cache/nscd
 
 install -v -Dm644 ../glibc-2.21/nscd/nscd.tmpfiles /usr/lib/tmpfiles.d/nscd.conf
 install -v -Dm644 ../glibc-2.21/nscd/nscd.service /lib/systemd/system/nscd.service
 
 mkdir -pv /usr/lib/locale
+
 localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
 localedef -i de_DE -f ISO-8859-1 de_DE
 localedef -i de_DE@euro -f ISO-8859-15 de_DE@euro
@@ -197,6 +213,7 @@ EOF
 tar -xf ../tzdata2015a.tar.gz
 
 ZONEINFO=/usr/share/zoneinfo
+
 mkdir -pv $ZONEINFO/{posix,right}
 
 for tz in etcetera southamerica northamerica europe africa antarctica  \
@@ -207,7 +224,9 @@ for tz in etcetera southamerica northamerica europe africa antarctica  \
 done
 
 cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+
 zic -d $ZONEINFO -p America/New_York
+
 unset ZONEINFO
 
 ln -sfv /usr/share/zoneinfo/America/Chicago /etc/localtime
@@ -224,6 +243,7 @@ cat >> /etc/ld.so.conf << "EOF"
 include /etc/ld.so.conf.d/*.conf
 
 EOF
+
 mkdir -pv /etc/ld.so.conf.d
 
 COUNT=15 # Add some blank lines so build output
@@ -278,7 +298,9 @@ ActualA="$(readelf -l a.out | grep ': /lib' | sed s/://g | cut -d '[' -f 2 | cut
 if [ "$ExpectedA" != "$ActualA" ]; then
     echo "!!!!!TOOLCHAIN ADJUSTMENT TEST 1 FAILED!!!!! Halting build, check your work."
     exit 0
+
 else
+
     COUNT=15 # Add some blank lines so build output
 #   	       is easier to review
 
@@ -367,7 +389,6 @@ else
     let COUNT=COUNT-1
     done
     unset COUNT
-
 fi
 
 cat > tlchn_test4.txt << "EOF"
@@ -470,6 +491,7 @@ else
 fi
 
 rm -v dummy.c a.out dummy.log
+
 cd .. && rm -rf glibc-2.21 glibc-build/
 
 
@@ -481,14 +503,20 @@ cd .. && rm -rf glibc-2.21 glibc-build/
 
 tar xf zlib-1.2.8.tar.xz &&
 cd zlib-1.2.8
-./configure --prefix=/usr &&
-make &&
-make check 2>&1 | tee /zlib-mkck-log_$(date +"%m-%d-%Y_%T") &&
-make install &&
-mv -v /usr/lib/libz.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
-cd .. && rm -rf zlib-1.2.8
 
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /zlib-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+mv -v /usr/lib/libz.so.* /lib
+
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+
+cd .. && rm -rf zlib-1.2.8
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -525,12 +553,16 @@ unset COUNT
 
 tar xf file-5.22.tar.gz &&
 cd file-5.22
-./configure --prefix=/usr &&
-make &&
-make check 2>&1 | tee /file-mkck-log_$(date +"%m-%d-%Y_%T") &&
-make install &&
-cd .. && rm -rf file-5.22
 
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /file-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf file-5.22
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -620,7 +652,6 @@ make tooldir=/usr install &&
 
 cd .. && rm -rf binutils-2.25 binutils-build/
 
-
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
 
@@ -662,16 +693,18 @@ cd gmp-6.0.0
             --docdir=/usr/share/doc/gmp-6.0.0a &&
 
 make &&
+
 make html &&
 
 make check 2>&1 | tee /gmp-check-logA &&
+
 awk '/tests passed/{total+=$2} ; END{print total}' /gmp-check-logA >> /gmp-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 make install &&
+
 make install-html &&
 
 cd .. && rm -rf gmp-6.0.0
-
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -716,15 +749,16 @@ patch -Np1 -i ../mpfr-3.1.2-upstream_fixes-3.patch &&
             --docdir=/usr/share/doc/mpfr-3.1.2 &&
 
 make &&
+
 make html &&
 
 make check 2>&1 | tee /mpfr-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 make install &&
+
 make install-html &&
 
 cd .. && rm -rf mpfr-3.1.2
-
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -765,15 +799,16 @@ cd mpc-1.0.2
 ./configure --prefix=/usr --docdir=/usr/share/doc/mpc-1.0.2 &&
 
 make &&
+
 make html &&
 
 make check 2>&1 | tee /mpc-mkck-log_$(date +"%m-%d-%Y_%T")
 
 make install &&
+
 make install-html &&
 
 cd .. && rm -rf mpc-1.0.2
-
 
 COUNT=15 # Add some blank lines so build output
 #          is easier to review
@@ -827,6 +862,7 @@ make &&
 ulimit -s 32768
 
 make -k check 2>&1 | tee /gcc-mkck-logA_$(date +"%m-%d-%Y_%T") &&
+
 ../gcc-4.9.2/contrib/test_summary | grep -A7 Summ >> /gcc-mkck-logB_$(date +"%m-%d-%Y_%T") &&
 
 make install &&
@@ -836,6 +872,7 @@ ln -sv ../usr/bin/cpp /lib
 ln -sv gcc /usr/bin/cc
 
 install -v -dm755 /usr/lib/bfd-plugins &&
+
 ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/4.9.2/liblto_plugin.so /usr/lib/bfd-plugins/
 
 
@@ -916,6 +953,8 @@ else
 fi
 
 rm -rf tlchn_test2.txt
+
+
 
 
 echo ok all designated builds completed
