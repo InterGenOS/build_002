@@ -1507,7 +1507,7 @@ FORCE_UNSAFE_CONFIGURE=1 ./configure \
 
 make &&
 
-make NON_ROOT_USERNAME=nobody check-root check 2>&1 | tee /coreutils-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make NON_ROOT_USERNAME=nobody check-root 2>&1 | tee /coreutils-mkck-log_$(date +"%m-%d-%Y_%T") &&
 
 make install &&
 
@@ -1544,6 +1544,21 @@ cd .. && rm -rf iana-etc-2.30
 ###############
 
 
+tar xf m4-1.4.17.tar.xz &&
+cd m4-1.4.17
+
+./configure --prefix=/usr &&
+
+make &&
+make check 2>&1 | tee /m4-mkck-log_$(date +"%m-%d-%Y_%T") &&
+make install &&
+
+cd .. && rm -rf m4-1.4.17
+
+
+
+
+
 
 
 
@@ -1553,7 +1568,6 @@ echo ok all designated builds completed
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### M4-1.4.17
 ### Flex-2.5.39
 ### Bison-3.0.4
 ### Grep-2.21
