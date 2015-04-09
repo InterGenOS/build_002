@@ -32,27 +32,27 @@
 ```
 === g++ Summary ===
 
-#### of expected passes            88501
-#### of unexpected successes       2
-#### of expected failures          443
-#### of unsupported tests          3058
+- number of expected passes            88501
+- number of unexpected successes       2
+- number of expected failures          443
+- number of unsupported tests          3058
 
 /sources/gcc-build/gcc/testsuite/g++/../../xg++  version 4.9.2 (GCC) 
 
 --
                 === gcc Summary ===
 
-- of expected passes            106396
-#### of unexpected failures        5
-#### of expected failures          252
-#### of unsupported tests          1404
+- number of expected passes            106396
+- number of unexpected failures        5
+- number of expected failures          252
+- number of unsupported tests          1404
 
 /sources/gcc-build/gcc/xgcc  version 4.9.2 (GCC) 
 
 --
                 === libatomic Summary ===
 
-#### of expected passes            54
+- number of expected passes            54
 
                 === libgomp tests ===
 
@@ -61,7 +61,7 @@ Running target unix
 
                 === libgomp Summary ===
 
-#### of expected passes            693
+- number of expected passes            693
 
                 === libitm tests ===
 
@@ -70,9 +70,9 @@ Running target unix
 
                 === libitm Summary ===
 
-#### of expected passes            26
-#### of expected failures          3
-#### of unsupported tests          1
+- number of expected passes            26
+- number of expected failures          3
+- number of unsupported tests          1
 
                 === libstdc++ tests ===
 
@@ -80,9 +80,9 @@ Running target unix
 --
                 === libstdc++ Summary ===
 
-#### of expected passes            9835
-#### of expected failures          41
-#### of unsupported tests          278
+- number of expected passes            9835
+- number of expected failures          41
+- number of unsupported tests          278
 
 Compiler version: 4.9.2 (GCC) 
 Platform: x86_64-unknown-linux-gnu
