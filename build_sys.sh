@@ -919,13 +919,13 @@ else
 fi
 
 cat > tlchn_test2.txt << "EOF"
-succeeded
-succeeded
-succeeded
+/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/crt1.o succeeded
+/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/crti.o succeeded
+/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/crtn.o succeeded
 EOF
 
 ExpectedI="$(cat tlchn_test2.txt)"
-ActualI="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log | awk '{print $2}')"
+ActualI="$(grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log)"
 
 if [ "$ExpectedI" != "$ActualI" ]; then
 
@@ -955,13 +955,13 @@ else
     unset COUNT
 fi
 
-rm -rf tlchn_test3.txt
+rm -rf tlchn_test2.txt
 
 cat > tlchn_test3.txt << "EOF"
 #include <...> search starts here:
- /usr/lib64/gcc/x86_64-unkown-linux-gnu/4.9.2/include
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include
  /usr/local/include
- /usr/lib64/gcc/x86_64-unkown-linux-gnu/4.9.2/include-fixed
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include-fixed
  /usr/include
 EOF
 
@@ -995,7 +995,7 @@ else
     unset COUNT
 fi
 
-rm tlchn_test3.txt
+rm -rf tlchn_test3.txt
 
 cat > tlchn_test4.txt << "EOF"
 SEARCH_DIR("/usr/x86_64-unknown-linux-gnu/lib64")
@@ -1040,6 +1040,223 @@ fi
 
 rm tlchn_test4.txt
 
+cat > tlchn_test5.txt << "EOF"
+attempt to open /lib64/libc.so.6 succeeded
+EOF
+
+ExpectedL="$(cat tlchn_test5.txt)"
+ActualL="$(grep "/lib.*/libc.so.6 " dummy.log)"
+
+if [ "$ExpectedL" != "$ActualL" ]; then
+    echo "!!!!!TOOLCHAIN TEST 5 FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "TOOLCHAIN TEST 5 PASSED, CONTINUING TESTS"
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+fi
+
+rm -rf tlchn_test5.txt
+
+cat > tlchn_test6.txt << "EOF"
+found ld-linux-x86-64.so.2 at /lib64/ld-linux-x86-64.so.2
+EOF
+
+ExpectedM="$(cat tlchn_test6.txt)"
+ActualM="$(grep found dummy.log)"
+
+if [ "$ExpectedM" != "$ActualM" ]; then
+    echo "!!!!!TOOLCHAIN TEST 6 FAILED!!!!! Halting build, check your work."
+    exit 0
+
+else
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+
+    echo "TOOLCHAIN TEST 6 PASSED, CONTINUING BUILD"
+
+    COUNT=15 # Add some blank lines so build output
+#              is easier to review
+
+    while [ "$COUNT" -gt "0" ]; do
+    echo " "
+    let COUNT=COUNT-1
+    done
+    unset COUNT
+fi
+
+rm -v dummy.c a.out dummy.log
+
+mkdir -pv /usr/share/gdb/auto-load/usr/lib
+mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
+
+cd .. && rm -rf gcc-build/ gcc-4.9.2
+
+
+#################
+## Bzip2-1.0.6 ##
+## =========== ##
+#################
+
+
+tar xf bzip2-1.0.6.tar.gz &&
+cd bzip2-1.0.6
+
+patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch
+
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+make -f Makefile-libbz2_so &&
+make clean &&
+make &&
+
+make PREFIX=/usr install
+
+cp -v bzip2-shared /bin/bzip2 &&
+cp -av libbz2.so* /lib &&
+ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
+rm -v /usr/bin/{bunzip2,bzcat,bzip2} &&
+ln -sv bzip2 /bin/bunzip2
+ln -sv bzip2 /bin/bzcat
+
+cd .. && rm -rf bzip2-1.0.6
+
+
+#####################
+## Pkg-config-0.28 ##
+## =============== ##
+#####################
+
+
+tar xf pkg-config-0.28.tar.gz &&
+cd pkg-config-0.28
+
+./configure --prefix=/usr        \
+            --with-internal-glib \
+            --disable-host-tool  \
+            --docdir=/usr/share/doc/pkg-config-0.28 &&
+
+make &&
+make -k check 2>&1 | tee /pkg-config-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf pkg-config-0.28
+
+
+#################
+## Ncurses-5.9 ##
+## =========== ##
+#################
+
+
+tar xf ncurses-5.9.tar.gz &&
+cd ncurses-5.9
+
+./configure --prefix=/usr           \
+            --mandir=/usr/share/man \
+            --with-shared           \
+            --without-debug         \
+            --enable-pc-files       \
+            --enable-widec &&
+
+make &&
+make install &&
+
+mv -v /usr/lib/libncursesw.so.5* /lib
+
+ln -sfv ../../lib/$(readlink /usr/lib/libncursesw.so) /usr/lib/libncursesw.so
+
+for lib in ncurses form panel menu ; do
+    rm -vf                    /usr/lib/lib${lib}.so
+    echo "INPUT(-l${lib}w)" > /usr/lib/lib${lib}.so
+    ln -sfv lib${lib}w.a      /usr/lib/lib${lib}.a
+    ln -sfv ${lib}w.pc        /usr/lib/pkgconfig/${lib}.pc
+done
+
+ln -sfv libncurses++w.a /usr/lib/libncurses++.a
+
+rm -vf                     /usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" > /usr/lib/libcursesw.so
+ln -sfv libncurses.so      /usr/lib/libcurses.so
+ln -sfv libncursesw.a      /usr/lib/libcursesw.a
+ln -sfv libncurses.a       /usr/lib/libcurses.a
+
+make distclean &&
+
+./configure --prefix=/usr    \
+            --with-shared    \
+            --without-normal \
+            --without-debug  \
+            --without-cxx-binding &&
+
+make sources libs &&
+
+cp -av lib/lib*.so.5* /usr/lib
+
+cd .. && rm -rf ncurses-5.9
+
+
+#################
+## Attr 2.4.47 ##
+## =========== ##
+#################
+
+
+tar xf attr-2.4.47.src.tar.gz &&
+cd attr-2.4.47
+
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+
+sed -i -e "/SUBDIRS/s|man2||" man/Makefile
+
+./configure --prefix=/usr &&
+
+make
+
+make -j1 test root-tests 2>&1 | tee /attr-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install install-dev install-lib &&
+
+chmod -v 755 /usr/lib/libattr.so
+
+mv -v /usr/lib/libattr.so.* /lib
+
+ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so
+
+cd .. && rm -rf attr-2.4.47
+
+
+
+
+
 
 
 echo ok all designated builds completed
@@ -1048,11 +1265,6 @@ echo ok all designated builds completed
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### GCC-4.9.2
-### Bzip2-1.0.6
-### Pkg-config-0.28
-### Ncurses-5.9
-### Attr-2.4.47
 ### Acl-2.2.52
 ### Libcap-2.24
 ### Sed-4.2.2
