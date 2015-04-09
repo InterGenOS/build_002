@@ -1414,7 +1414,134 @@ mv -v /usr/bin/killall /bin
 cd .. && rm -rf psmisc-22.21
 
 
+######################
+## Procps-ng-3.3.10 ##
+## ================ ##
+######################
 
+
+tar xf procps-ng-3.3.10.tar.xz &&
+cd procps-ng-3.3.10
+
+./configure --prefix=/usr                            \
+            --exec-prefix=                           \
+            --libdir=/usr/lib                        \
+            --docdir=/usr/share/doc/procps-ng-3.3.10 \
+            --disable-static                         \
+            --disable-kill &&
+
+make &&
+
+sed -i -r 's|(pmap_initname)\\\$|\1|' testsuite/pmap.test/pmap.exp
+
+make check 2>&1 | tee /procps-ng-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+mv -v /usr/bin/pidof /bin
+mv -v /usr/lib/libprocps.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
+
+cd .. && rm -rf procps-ng-3.3.10
+
+
+#######################
+## E2fsprogs-1.42.12 ##
+## ================= ##
+#######################
+
+
+tar xf e2fsprogs-1.42.12.tar.gz &&
+cd e2fsprogs-1.42.12
+
+sed -e '/int.*old_desc_blocks/s/int/blk64_t/' \
+    -e '/if (old_desc_blocks/s/super->s_first_meta_bg/desc_blocks/' \
+    -i lib/ext2fs/closefs.c &&
+
+mkdir -v build
+cd build
+
+LIBS=-L/tools/lib                    \
+CFLAGS=-I/tools/include              \
+PKG_CONFIG_PATH=/tools/lib/pkgconfig \
+../configure --prefix=/usr           \
+             --bindir=/bin           \
+             --with-root-prefix=""   \
+             --enable-elf-shlibs     \
+             --disable-libblkid      \
+             --disable-libuuid       \
+             --disable-uuidd         \
+             --disable-fsck &&
+
+make &&
+
+ln -sfv /tools/lib/lib{blk,uu}id.so.1 lib
+make LD_LIBRARY_PATH=/tools/lib check 2>&1 | tee /e2fsprogs-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+make install-libs &&
+
+chmod -v u+w /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a &&
+
+gunzip -v /usr/share/info/libext2fs.info.gz
+install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info &&
+
+cd ../.. && rm -rf e2fsprogs-1.42.12
+
+
+####################
+## Coreutils-8.23 ##
+## ============== ##
+####################
+
+
+tar xf coreutils-8.23.tar.xz &&
+cd coreutils-8.23
+
+patch -Np1 -i ../coreutils-8.23-i18n-1.patch 
+touch Makefile.in
+
+FORCE_UNSAFE_CONFIGURE=1 ./configure \
+            --prefix=/usr            \
+            --enable-no-install-program=kill,uptime &&
+
+make &&
+
+make NON_ROOT_USERNAME=nobody check-root check 2>&1 | tee /coreutils-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+mv -v /usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} /bin
+mv -v /usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} /bin
+mv -v /usr/bin/{rmdir,stty,sync,true,uname} /bin
+mv -v /usr/bin/chroot /usr/sbin
+mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
+sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8
+
+mv -v /usr/bin/{head,sleep,nice,test,[} /bin
+
+cd .. && rm -rf coreutils-8.23
+
+
+###################
+## Iana-Etc-2.30 ##
+## ============= ##
+###################
+
+
+tar xf iana-etc-2.30.tar.bz2 
+root:/sources# cd iana-etc-2.30
+
+make &&
+make install
+
+cd .. && rm -rf iana-etc-2.30
+
+
+###############
+## M4-1.4.17 ##
+## ========= ##
+###############
 
 
 
@@ -1426,10 +1553,6 @@ echo ok all designated builds completed
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### Procps-ng-3.3.10
-### E2fsprogs-1.42.12
-### Coreutils-8.23
-### Iana-Etc-2.30
 ### M4-1.4.17
 ### Flex-2.5.39
 ### Bison-3.0.4
