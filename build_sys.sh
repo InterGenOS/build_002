@@ -1254,6 +1254,167 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so
 cd .. && rm -rf attr-2.4.47
 
 
+################
+## Acl-2.2.52 ##
+## ========== ##
+################
+
+
+tar xf acl-2.2.52.src.tar.gz &&
+cd acl-2.2.52
+
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+
+sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test
+
+sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
+    libacl/__acl_to_any_text.c
+
+./configure --prefix=/usr --libexecdir=/usr/lib &&
+
+make &&
+
+make install install-dev install-lib &&
+chmod -v 755 /usr/lib/libacl.so
+
+mv -v /usr/lib/libacl.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libacl.so) /usr/lib/libacl.so
+
+cd .. && rm -rf acl-2.2.52
+
+
+#################
+## Libcap-2.24 ##
+## =========== ##
+#################
+
+
+tar xf libcap-2.24.tar.xz &&
+cd libcap-2.24
+
+make &&
+make RAISE_SETFCAP=no prefix=/usr install &&
+
+chmod -v 755 /usr/lib/libcap.so
+
+mv -v /usr/lib/libcap.so.* /lib
+
+ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so
+
+cd .. && rm -rf libcap-2.24
+
+
+###############
+## Sed-4.2.2 ##
+## ========= ##
+###############
+
+
+tar xf sed-4.2.2.tar.bz2 &&
+cd sed-4.2.2
+
+./configure --prefix=/usr --bindir=/bin --htmldir=/usr/share/doc/sed-4.2.2
+
+make &&
+make html &&
+
+make -k check 2>&1 | tee /sed-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+make -C doc install-html &&
+
+cd .. && rm -rf sed-4.2.2
+
+
+####################
+## cracklib-2.9.1 ##
+## ============== ##
+####################
+
+
+tar xf cracklib-2.9.1.tar.gz &&
+cd cracklib-2.9.1
+
+./configure --prefix=/usr \
+            --with-default-dict=/lib/cracklib/pw_dict \
+            --disable-static &&
+make &&
+
+make install &&
+mv -v /usr/lib/libcrack.so.* /lib &&
+ln -sfv ../../lib/$(readlink /usr/lib/libcrack.so) /usr/lib/libcrack.so
+
+install -v -m644 -D    ../cracklib-words-20080507.gz           \
+                         /usr/share/dict/cracklib-words.gz     &&
+gunzip -v                /usr/share/dict/cracklib-words.gz     &&
+ln -v -sf cracklib-words /usr/share/dict/words                 &&
+echo $(hostname) >>      /usr/share/dict/cracklib-extra-words  &&
+install -v -m755 -d      /lib/cracklib                         &&
+create-cracklib-dict     /usr/share/dict/cracklib-words        \
+                         /usr/share/dict/cracklib-extra-words &&
+
+cd .. && rm -rf cracklib-2.9.1
+
+
+##################
+## Shadow-4.2.1 ##
+## ============ ##
+##################
+
+
+tar xf shadow-4.2.1.tar.xz &&
+cd shadow-4.2.1
+
+sed -i 's/groups$(EXEEXT) //' src/Makefile.in
+find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \; &&
+
+sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
+       -e 's@/var/spool/mail@/var/mail@' etc/login.defs
+
+sed -i 's@DICTPATH.*@DICTPATH\t/lib/cracklib/pw_dict@' etc/login.defs
+
+sed -i 's/1000/999/' etc/useradd
+
+./configure --sysconfdir=/etc --with-group-name-max-length=32 --with-libcrack &&
+
+make &&
+
+make install &&
+
+mv -v /usr/bin/passwd /bin
+
+pwconv &&
+
+grpconv &&
+
+sed -i 's/yes/no/' /etc/default/useradd
+
+echo "root:intergenos" | chpasswd &&
+
+cd .. && rm -rf shadow-4.2.1
+
+
+##################
+## Psmisc-22.21 ##
+## ============ ##
+##################
+
+
+tar xf psmisc-22.21.tar.gz
+cd psmisc-22.21
+
+./configure --prefix=/usr &&
+
+make &&
+make install &&
+
+mv -v /usr/bin/fuser   /bin
+mv -v /usr/bin/killall /bin
+
+cd .. && rm -rf psmisc-22.21
+
+
+
 
 
 
@@ -1265,11 +1426,6 @@ echo ok all designated builds completed
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### Acl-2.2.52
-### Libcap-2.24
-### Sed-4.2.2
-### Shadow-4.2.1
-### Psmisc-22.21
 ### Procps-ng-3.3.10
 ### E2fsprogs-1.42.12
 ### Coreutils-8.23
