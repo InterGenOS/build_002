@@ -9,13 +9,13 @@
 
 ```
 
-- Build 002 is seeing 'make check' issues with glibc-2.21.  113 identical errors are being reported with each
+- 3/11/15 Build 002 is seeing 'make check' issues with glibc-2.21.  113 identical errors are being reported with each
   run, whether it's done using setup.sh to set the temp system or done manually.  #lfs-support hasn't responded
   yet, but will post when they do
 
         sample 'make check' output log: http://intergenstudios.com/Downloads/glibc-2.21_make-check_log.txt
 
-- *** RESPONSE FROM LFS-SUPPORT - 3/12 ***
+- *** RESPONSE FROM LFS-SUPPORT - 3/12/15 ***
     [10:05] <archetech_> if the linker tests pass move on
     [10:07] <archetech_> stuff will blow out later if it's a bad build
 
@@ -23,6 +23,65 @@
 
 - *** updated kernel to 3.19, and now glibc-2.21 is compiling with ZERO errors.  On to the rest of the basic
 - *** system packages.  :)
+
+- *** 4/9/2015 ***
+- Testing results for Glibc and GCC packages
+- Glibc compiled with 0 errors, 3 unexpected successes
+- GCC compiled with 0 errors, 2 unexpected successes (results below)
+
+```
+=== g++ Summary ===
+
+# of expected passes            88501
+# of unexpected successes       2
+# of expected failures          443
+# of unsupported tests          3058
+/sources/gcc-build/gcc/testsuite/g++/../../xg++  version 4.9.2 (GCC) 
+
+--
+                === gcc Summary ===
+
+# of expected passes            106396
+# of unexpected failures        5
+# of expected failures          252
+# of unsupported tests          1404
+/sources/gcc-build/gcc/xgcc  version 4.9.2 (GCC) 
+
+--
+                === libatomic Summary ===
+
+# of expected passes            54
+                === libgomp tests ===
+
+
+Running target unix
+
+                === libgomp Summary ===
+
+# of expected passes            693
+                === libitm tests ===
+
+
+Running target unix
+
+                === libitm Summary ===
+
+# of expected passes            26
+# of expected failures          3
+# of unsupported tests          1
+                === libstdc++ tests ===
+
+
+--
+                === libstdc++ Summary ===
+
+# of expected passes            9835
+# of expected failures          41
+# of unsupported tests          278
+
+Compiler version: 4.9.2 (GCC) 
+Platform: x86_64-unknown-linux-gnu
+```
 
 - Package separation to be done roughly as:
     
