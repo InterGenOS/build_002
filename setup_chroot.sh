@@ -31,9 +31,11 @@ fi
 
 wget https://raw.githubusercontent.com/InterGenOS/build_002/master/setup_structure.sh -P $IGos
 wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys.sh -P $IGos
+wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys2.sh -P $IGos
 
 chmod +x $IGos/setup_structure.sh
 chmod +x $IGos/build_sys.sh
+chmod +x $IGos/build_sys2.sh
 
 COUNT=10 # Add some blank lines so build output
 #          is easier to review
