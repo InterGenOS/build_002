@@ -921,56 +921,130 @@ make install &&
 cd .. && rm -rf m4-1.4.17
 
 
+#################
+## Flex-2.5.39 ##
+## =========== ##
+#################
 
 
+tar xf flex-2.5.39.tar.bz2 &&
+cd flex-2.5.39/
+
+sed -i -e '/test-bison/d' tests/Makefile.in
+
+./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.5.39 &&
+
+make &&
+
+make check 2>&1 | tee /flex-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+ln -sv flex /usr/bin/lex
+
+cd .. && rm -rf flex-2.5.39/
 
 
+#################
+## Bison-3.0.4 ##
+## =========== ##
+#################
 
 
-echo ok all designated builds completed
+tar xf bison-3.0.4.tar.xz &&
+cd bison-3.0.4/
 
-### remaining packages to be added as testing finishes
-###
-### packages in testing as of 4/6/2015:
-###
-### Flex-2.5.39
-### Bison-3.0.4
-### Grep-2.21
-### Readline-6.3
-### Bash-4.3.30
-### Bc-1.06.95
-### Libtool-2.4.6
-### GDBM-1.11
-### Expat-2.1.0
-### Inetutils-1.9.2
-### Perl-5.20.2
-### XML::Parser-2.44
-### Autoconf-2.69
-### Automake-1.15
-### Diffutils-3.3
-### Gawk-4.1.1
-### Findutils-4.4.2
-### Gettext-0.19.4
-### Intltool-0.50.2
-### Gperf-3.0.4
-### Groff-1.22.3
-### Xz-5.2.0
-### GRUB-2.02~beta2
-### Less-458
-### Gzip-1.6
-### IPRoute2-3.19.0
-### Kbd-2.0.2
-### Kmod-19
-### Libpipeline-1.4.0
-### Make-4.1
-### Patch-2.7.4
-### Systemd-219
-### D-Bus-1.8.16
-### Util-linux-2.26
-### Man-DB-2.7.1
-### Tar-1.28
-### Texinfo-5.2
-### Vim-7.4
-### Nano-2.26
-###
-###
+./configure --prefix=/usr --docdir=/usr/share/doc/bison-3.0.4 &&
+
+make &&
+
+make check 2>&1 | tee /bison-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf bison-3.0.4/
+
+
+###############
+## Grep-2.21 ##
+## ========= ##
+###############
+
+
+tar xf grep-2.21.tar.xz &&
+cd grep-2.21/
+
+sed -i -e '/tp++/a  if (ep <= tp) break;' src/kwset.c
+
+./configure --prefix=/usr --bindir=/bin &&
+
+make &&
+
+make check 2>&1 | tee /grep-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf grep-2.21/
+
+
+##################
+## Readline-6.3 ##
+## ============ ##
+##################
+
+
+tar xf readline-6.3.tar.gz &&
+cd readline-6.3/
+
+patch -Np1 -i ../readline-6.3-upstream_fixes-3.patch &&
+
+sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+./configure --prefix=/usr --docdir=/usr/share/doc/readline-6.3 &&
+
+make SHLIB_LIBS=-lncurses &&
+
+make SHLIB_LIBS=-lncurses install &&
+
+mv -v /usr/lib/lib{readline,history}.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so
+
+cd .. && rm -rf readline-6.3/
+
+
+#################
+## Bash-4.3.30 ##
+## =========== ##
+#################
+
+
+tar xf bash-4.3.30.tar.gz &&
+cd bash-4.3.30/
+
+patch -Np1 -i ../bash-4.3.30-upstream_fixes-1.patch &&
+
+./configure --prefix=/usr                       \
+            --bindir=/bin                       \
+            --docdir=/usr/share/doc/bash-4.3.30 \
+            --without-bash-malloc               \
+            --with-installed-readline &&
+
+make &&
+
+chown -Rv nobody .
+
+su nobody -s /bin/bash -c "PATH=$PATH make tests" &&
+
+make install &&
+
+cat > /root/.bash_profile << "EOF"
+/bin/bash /.build_sys3.sh
+EOF
+
+chmod +x /build_sys3.sh
+
+exec /bin/bash --login +h
+
+
