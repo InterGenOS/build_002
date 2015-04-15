@@ -195,6 +195,244 @@ make install &&
 cd .. && rm -rf autoconf-2.69/
 
 
+###################
+## Automake-1.15 ##
+## ============= ##
+###################
+
+
+tar xf automake-1.15.tar.xz &&
+cd automake-1.15/
+
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15 &&
+
+make &&
+
+sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &:" t/lex-{clean,depend}-cxx.sh
+make -j4 check 2>&1 | tee /automake-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf automake-1.15/
+
+
+###################
+## Diffutils-3.3 ##
+## ============= ##
+###################
+
+
+tar xf diffutils-3.3.tar.xz &&
+cd diffutils-3.3/
+
+sed -i 's:= @mkdir_p@:= /bin/mkdir -p:' po/Makefile.in.in
+
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /diffutils-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf diffutils-3.3/
+
+
+################
+## Gawk-4.1.1 ##
+## ========== ##
+################
+
+
+tar xf gawk-4.1.1.tar.xz &&
+cd gawk-4.1.1/
+
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /gawk-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf gawk-4.1.1/
+
+
+#####################
+## Findutils-4.4.2 ##
+## =============== ##
+#####################
+
+
+tar xf findutils-4.4.2.tar.gz &&
+cd findutils-4.4.2/
+
+./configure --prefix=/usr --localstatedir=/var/lib/locate &&
+
+make &&
+
+make check 2>&1 | tee /findutils-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+mv -v /usr/bin/find /bin
+sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
+
+cd .. && rm -rf findutils-4.4.2/
+
+
+####################
+## Gettext-0.19.4 ##
+## ============== ##
+####################
+
+
+tar xf gettext-0.19.4.tar.xz &&
+cd gettext-0.19.4/
+
+./configure --prefix=/usr --docdir=/usr/share/doc/gettext-0.19.4 &&
+
+make &&
+
+make check 2>&1 | tee /gettext-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf gettext-0.19.4/
+
+
+#####################
+## Intltool-0.50.2 ##
+## =============== ##
+#####################
+
+
+tar xf intltool-0.50.2.tar.gz &&
+cd intltool-0.50.2/
+
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /intltool-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.50.2/I18N-HOWTO &&
+
+cd .. && rm -rf intltool-0.50.2/
+
+
+#################
+## Gperf-3.0.4 ##
+## =========== ##
+#################
+
+
+tar xf gperf-3.0.4.tar.gz &&
+cd gperf-3.0.4/
+
+./configure --prefix=/usr --docdir=/usr/share/doc/gperf-3.0.4 &&
+
+make &&
+
+make check 2>&1 | tee /gperf-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf gperf-3.0.4/
+
+
+##################
+## Groff-1.22.3 ##
+## ============ ##
+##################
+
+
+tar xf groff-1.22.3.tar.gz &&
+cd groff-1.22.3/
+
+PAGE=letter ./configure --prefix=/usr &&
+
+make &&
+
+make install &&
+
+cd .. && rm -rf groff-1.22.3/
+
+
+##############
+## Xz-5.2.0 ##
+## ======== ##
+##############
+
+
+tar xf xz-5.2.0.tar.xz &&
+cd xz-5.2.0/
+
+./configure --prefix=/usr --docdir=/usr/share/doc/xz-5.2.0 &&
+
+make &&
+
+make check 2>&1 | tee /xz-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+mv -v   /usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} /bin
+mv -v /usr/lib/liblzma.so.* /lib
+ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so
+
+cd .. && rm -rf xz-5.2.0/
+
+
+#####################
+## GRUB-2.02~beta2 ##
+## =============== ##
+#####################
+
+
+tar xf grub-2.02~beta2.tar.xz &&
+cd grub-2.02~beta2/
+
+./configure --prefix=/usr          \
+            --sbindir=/sbin        \
+            --sysconfdir=/etc      \
+            --disable-grub-emu-usb \
+            --disable-efiemu       \
+            --disable-werror &&
+
+make &&
+
+make install &&
+
+cd .. && rm -rf grub-2.02~beta2/
+
+
+##############
+## Less-458 ##
+## ======== ##
+##############
+
+
+tar xf less-458.tar.gz &&
+cd less-458/
+
+./configure --prefix=/usr --sysconfdir=/etc &&
+
+make &&
+
+make install &&
+
+cd .. && rm -rf less-458/
+
+
+##############
+## Gzip-1.6 ##
+## ======== ##
+##############
+
+
+
+
+
 
 
 echo ok all designated builds completed
@@ -203,17 +441,6 @@ echo ok all designated builds completed
 ###
 ### packages in testing as of 4/6/2015:
 ###
-### Automake-1.15
-### Diffutils-3.3
-### Gawk-4.1.1
-### Findutils-4.4.2
-### Gettext-0.19.4
-### Intltool-0.50.2
-### Gperf-3.0.4
-### Groff-1.22.3
-### Xz-5.2.0
-### GRUB-2.02~beta2
-### Less-458
 ### Gzip-1.6
 ### IPRoute2-3.19.0
 ### Kbd-2.0.2
