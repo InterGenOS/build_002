@@ -430,31 +430,424 @@ cd .. && rm -rf less-458/
 ##############
 
 
+tar xf gzip-1.6.tar.xz &&
+cd gzip-1.6/
+
+./configure --prefix=/usr --bindir=/bin &&
+
+make &&
+
+make check 2>&1 | tee /gzip-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+mv -v /bin/{gzexe,uncompress,zcmp,zdiff,zegrep} /usr/bin
+mv -v /bin/{zfgrep,zforce,zgrep,zless,zmore,znew} /usr/bin
+
+cd .. && rm -rf gzip-1.6/
 
 
+#####################
+## IPRoute2-3.19.0 ##
+## =============== ##
+#####################
 
+
+tar xf iproute2-3.19.0.tar.xz &&
+cd iproute2-3.19.0/
+
+sed -i '/^TARGETS/s@arpd@@g' misc/Makefile
+sed -i /ARPD/d Makefile
+sed -i 's/arpd.8//' man/man8/Makefile
+
+make &&
+
+make DOCDIR=/usr/share/doc/iproute2-3.19.0 install &&
+
+cd .. && rm -rf iproute2-3.19.0/
+
+
+###############
+## Kbd-2.0.2 ##
+## ========= ##
+###############
+
+
+tar xf kbd-2.0.2.tar.gz &&
+cd kbd-2.0.2/
+
+patch -Np1 -i ../kbd-2.0.2-backspace-1.patch &&
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock &&
+
+make &&
+
+make check 2>&1 | tee /kbd-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf kbd-2.0.2/
+
+
+#############
+## Kmod-19 ##
+## ======= ##
+#############
+
+
+tar xf kmod-19.tar.xz &&
+cd kmod-19/
+
+./configure --prefix=/usr          \
+            --bindir=/bin          \
+            --sysconfdir=/etc      \
+            --with-rootlibdir=/lib \
+            --with-xz              \
+            --with-zlib &&
+
+make &&
+
+make check 2>&1 | tee /kmod-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+  ln -sv ../bin/kmod /sbin/$target
+done
+
+ln -sv kmod /bin/lsmod
+
+cd .. && rm -rf kmod-19/
+
+
+#######################
+## Libpipeline-1.4.0 ##
+## ================= ##
+#######################
+
+
+tar xf libpipeline-1.4.0.tar.gz &&
+cd libpipeline-1.4.0/
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /libpipeline-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf libpipeline-1.4.0/
+
+
+##############
+## Make-4.1 ##
+## ======== ##
+##############
+
+
+tar xf make-4.1.tar.bz2 &&
+cd make-4.1/
+
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /make-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf make-4.1/
+
+
+#################
+## Patch-2.7.4 ##
+## =========== ##
+#################
+
+
+tar xf patch-2.7.4.tar.xz &&
+cd patch-2.7.4/
+
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /patch-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf patch-2.7.4/
+
+
+#################
+## Systemd-219 ##
+## =========== ##
+#################
+
+
+tar xf systemd-219.tar.xz &&
+cd systemd-219/
+
+cat > config.cache << "EOF"
+KILL=/bin/kill
+HAVE_BLKID=1
+BLKID_LIBS="-lblkid"
+BLKID_CFLAGS="-I/tools/include/blkid"
+HAVE_LIBMOUNT=1
+MOUNT_LIBS="-lmount"
+MOUNT_CFLAGS="-I/tools/include/libmount"
+cc_cv_CFLAGS__flto=no
+EOF
+
+sed -i "s:blkid/::" $(grep -rl "blkid/blkid.h")
+
+patch -Np1 -i ../systemd-219-compat-1.patch
+
+sed -i "s:test/udev-test.pl ::g" Makefile.in
+
+./configure --prefix=/usr                                           \
+            --sysconfdir=/etc                                       \
+            --localstatedir=/var                                    \
+            --config-cache                                          \
+            --with-rootprefix=                                      \
+            --with-rootlibdir=/lib                                  \
+            --enable-split-usr                                      \
+            --disable-gudev                                         \
+            --disable-firstboot                                     \
+            --disable-ldconfig                                      \
+            --disable-sysusers                                      \
+            --without-python                                        \
+            --docdir=/usr/share/doc/systemd-219                     \
+            --with-dbuspolicydir=/etc/dbus-1/system.d               \
+            --with-dbussessionservicedir=/usr/share/dbus-1/services \
+            --with-dbussystemservicedir=/usr/share/dbus-1/system-services &&
+
+make LIBRARY_PATH=/tools/lib &&
+
+mv -v /usr/lib/libnss_{myhostname,mymachines,resolve}.so.2 /lib &&
+
+rm -rfv /usr/lib/rpm &&
+
+for tool in runlevel reboot shutdown poweroff halt telinit; do
+     ln -sfv ../bin/systemctl /sbin/${tool}
+done
+ln -sfv ../lib/systemd/systemd /sbin/init
+
+sed -i "s:0775 root lock:0755 root root:g" /usr/lib/tmpfiles.d/legacy.conf
+sed -i "/pam.d/d" /usr/lib/tmpfiles.d/etc.conf
+
+systemd-machine-id-setup &&
+
+sed -i "s:minix:ext4:g" src/test/test-path-util.c
+make LD_LIBRARY_PATH=/tools/lib -k check 2>&1 | tee /systemd-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+cd .. && rm -rf systemd-219/
+
+
+##################
+## D-Bus-1.8.16 ##
+## ============ ##
+##################
+
+
+tar xf dbus-1.8.16.tar.gz &&
+cd dbus-1.8.16/
+
+./configure --prefix=/usr                       \
+            --sysconfdir=/etc                   \
+            --localstatedir=/var                \
+            --docdir=/usr/share/doc/dbus-1.8.16 \
+            --with-console-auth-dir=/run/console &&
+
+make &&
+
+make install &&
+
+mv -v /usr/lib/libdbus-1.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libdbus-1.so) /usr/lib/libdbus-1.so
+
+ln -sfv /etc/machine-id /var/lib/dbus
+
+cd .. && rm -rf dbus-1.8.16/
+
+
+#####################
+## Util-linux-2.26 ##
+## =============== ##
+#####################
+
+
+tar xf util-linux-2.26.tar.xz &&
+cd util-linux-2.26/
+
+mkdir -pv /var/lib/hwclock
+
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --docdir=/usr/share/doc/util-linux-2.26 \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --without-python &&
+
+make &&
+
+chown -Rv nobody .
+su nobody -s /bin/bash -c "PATH=$PATH make -k check" 2>&1 | tee /util_linux-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+cd .. && rm -rf util-linux-2.26/
+
+
+##################
+## Man-DB-2.7.1 ##
+## ============ ##
+##################
+
+
+tar xf man-db-2.7.1.tar.xz &&
+cd man-db-2.7.1/
+
+./configure --prefix=/usr                        \
+            --docdir=/usr/share/doc/man-db-2.7.1 \
+            --sysconfdir=/etc                    \
+            --disable-setuid                     \
+            --with-browser=/usr/bin/lynx         \
+            --with-vgrind=/usr/bin/vgrind        \
+            --with-grap=/usr/bin/grap &&
+
+make &&
+
+make check 2>&1 | tee /man_db-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+sed -i "s:man root:root root:g" /usr/lib/tmpfiles.d/man-db.conf
+
+cd .. && rm -rf man-db-2.7.1/
+
+
+##############
+## Tar-1.28 ##
+## ======== ##
+##############
+
+
+tar xf tar-1.28.tar.xz &&
+cd tar-1.28/
+
+FORCE_UNSAFE_CONFIGURE=1  \
+./configure --prefix=/usr \
+            --bindir=/bin &&
+
+make &&
+
+make check 2>&1 | tee /tar-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+make -C doc install-html docdir=/usr/share/doc/tar-1.28 &&
+
+cd .. && rm -rf tar-1.28/
+
+
+#################
+## Texinfo-5.2 ##
+## =========== ##
+#################
+
+
+tar xf texinfo-5.2.tar.xz &&
+cd texinfo-5.2/
+
+./configure --prefix=/usr &&
+
+make &&
+
+make check 2>&1 | tee /texinfo-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+make TEXMF=/usr/share/texmf install-tex &&
+
+cd .. && rm -rf texinfo-5.2/
+
+
+#############
+## Vim-7.4 ##
+## ======= ##
+#############
+
+
+tar xf vim-7.4.tar.bz2 &&
+cd vim74/
+
+echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+
+./configure --prefix=/usr &&
+
+make &&
+
+make -j1 test > /vim-mkck-log_$(date +"%m-%d-%Y_%T") &&
+
+make install &&
+
+ln -sv vim /usr/bin/vi
+for L in  /usr/share/man/{,*/}man1/vim.1; do
+    ln -sv vim.1 $(dirname $L)/vi.1
+done
+
+ln -sv ../vim/vim74/doc /usr/share/doc/vim-7.4
+
+
+cat > /etc/vimrc << "EOF"
+" Begin /etc/vimrc
+
+set nocompatible
+set backspace=2
+syntax on
+if (&term == "iterm") || (&term == "putty")
+  set background=dark
+endif
+
+" End /etc/vimrc
+EOF
+
+cd .. && rm -rf vim74/
+
+
+################
+## Nano-2.3.6 ##
+## ========== ##
+################
+
+
+tar xf nano-2.3.6.tar.gz &&
+cd nano-2.3.6/
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --enable-utf8     \
+            --enable-nanorc   \
+            --docdir=/usr/share/doc/nano-2.3.6 &&
+make &&
+
+make install &&
+install -v -m644 doc/nanorc.sample /etc &&
+install -v -m644 doc/texinfo/nano.html /usr/share/doc/nano-2.3.6 &&
+cp intergen_nanorc /etc/nanorc
+
+cd .. && rm -rf nano-2.3.6/
 
 
 echo ok all designated builds completed
 
-### remaining packages to be added as testing finishes
-###
-### packages in testing as of 4/6/2015:
-###
-### Gzip-1.6
-### IPRoute2-3.19.0
-### Kbd-2.0.2
-### Kmod-19
-### Libpipeline-1.4.0
-### Make-4.1
-### Patch-2.7.4
-### Systemd-219
-### D-Bus-1.8.16
-### Util-linux-2.26
-### Man-DB-2.7.1
-### Tar-1.28
-### Texinfo-5.2
-### Vim-7.4
-### Nano-2.26
 ###
 ###
