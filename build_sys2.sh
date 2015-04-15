@@ -1040,7 +1040,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make tests" &&
 make install &&
 
 cat > /root/.bash_profile << "EOF"
-/bin/bash /.build_sys3.sh
+/bin/bash ../.././build_sys3.sh
 EOF
 
 chmod +x /build_sys3.sh
