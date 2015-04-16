@@ -846,8 +846,41 @@ cp intergen_nanorc /etc/nanorc
 
 cd .. && rm -rf nano-2.3.6/
 
-
-echo ok all designated builds completed
-
+echo " "
+echo " "
+echo " "
+echo " "
+echo "____________________________________________________________"
+echo "                                                          "
+echo "  Core package builds completed!                          "
+echo "                                                          "
+echo "  Now pass the 'exit' command twice to leave the chroot   "
+echo "  environment and return to the host system's root        "
+echo "  terminal, and then re-enter the chroot environment      "
+echo "  by copy/pasting the following command:                  "
+echo " "
+echo "  chroot \$LFS /tools/bin/env -i            \\"
+echo "      HOME=/root TERM=\$TERM PS1='\\u:\\w\\\$ ' \\"
+echo "      PATH=/bin:/usr/bin:/sbin:/usr/sbin   \\"
+echo "      /tools/bin/bash --login"
+echo " "
+echo "  Once you've re-entered the chroot environment, copy/paste"
+echo "  the following command to strip unnecessary symbols from "
+echo "  binaries and libraries and continue the build:"
+echo " "
+echo "  /tools/bin/find /{,usr/}{bin,lib,sbin} -type f \\"
+echo "      -exec /tools/bin/strip --strip-debug '{}' ';' &&"
+echo "      echo \" \"                                 \\"
+echo "      echo \" \"                                 \\"
+echo "      echo \" -------------------------------- \"\\"
+echo "      echo \" \"                                 \\"
+echo "      echo \" Now run: /bin/bash build_sys4.sh \"\\"
+echo "      echo \" \"                                 \\"
+echo "      echo \" -------------------------------- \"\\"
+echo "      echo \" \" "
+echo "__________________________________________________________"
+echo " "
+echo " "
+echo " "
 ###
 ###
