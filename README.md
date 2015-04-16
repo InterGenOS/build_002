@@ -26,8 +26,13 @@
 
 - *** 4/9/2015 ***
 - Testing results for Glibc and GCC packages
-- Glibc compiled with 0 errors, 3 unexpected successes
-- GCC compiled with 0 errors, 2 unexpected successes (results below)
+- Glibc compiled with 0 failures, 3 unexpected successes
+- GCC compiled with 0 failures, 2 unexpected successes (results below)
+
+- *** 4/16/2015 ***
+- Scripts are building the entire core system now with 0 errors
+- Scripts are being started for base system components (xorg, kde, gnome, etc)
+- Huge thanks are in order- Security aspects will be assessed by recent OSCP grad and pen testing specialist Mr. Tyler Ward.
 
 ```
 === g++ Summary ===
