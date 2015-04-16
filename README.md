@@ -32,7 +32,8 @@
 - *** 4/16/2015 ***
 - Scripts are building the entire core system now with 0 errors
 - Scripts are being started for base system components (xorg, kde, gnome, etc)
-- Huge thanks are in order- Security aspects will be assessed by recent OSCP grad and pen testing specialist Mr. Tyler Ward.
+- Huge thanks are in order- Security aspects will be assessed by recent 
+- OSCP grad and pen testing specialist Mr. Tyler Ward.
 
 ```
 === g++ Summary ===
