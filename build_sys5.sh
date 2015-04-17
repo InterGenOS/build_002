@@ -12,3 +12,31 @@ Name=eth0
 [Network]
 DHCP=yes
 EOF
+
+# Updates to follow -4-16-15
+# --------------------------
+#
+# To do:
+# ==========================
+#
+# /etc/resolv.conf
+# /etc/hostname
+# /etc/hosts
+# blacklist forte in /etc/modprobe.d/blacklist.conf
+# /etc/adjtime
+# systemd-timesyncd
+# /etc/vconsole.conf (notes in InterGen's ownCloud)
+# Configure system locale
+# /etc/inputrc
+# /etc/shells
+# /etc/skel
+# Take a vote for screen clearing at boot
+# Disable tmpfs for /tmp
+# /etc/fstab
+# Compile Kernel ****KEEP BUILD DIRECTORY!****
+# (It's needed for Realtek driver compilation)
+# GRUB (can re-use template from build_001)
+# /etc/os-release
+# /etc/lsb-release
+# Begin Linpack Pkg Generation
+# Script core FS layout
