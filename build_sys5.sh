@@ -757,8 +757,27 @@ dircolors -p > /etc/dircolors
 
 ##------------------------------------------------------
 
+ln -sfv /dev/null /etc/systemd/system/tmp.mount
+
 ##------------------------------------------------------
 
+echo " "
+echo " "
+echo " "
+echo "Main system configurations have been completed"
+echo " "
+echo "If your build has completed to this point, feel free to continue on at:"
+echo " "
+echo "http://linuxfromscratch.org/lfs/view/stable-systemd/chapter08/fstab.html"
+echo " "
+echo "making sure to substitute \$IGos for any \$LFS that you see listed,"
+echo "or you can wait for script updates at https://github.com/InterGenOS/build_002"
+echo " "
+echo "Again, we appreciate your participation in the InterGenOS Project"
+echo " "
+echo "Thank you, and remember- The cake is a lie"
+echo " "
+echo " "
 
 # Updates to follow -4-16-15
 # --------------------------
@@ -766,7 +785,6 @@ dircolors -p > /etc/dircolors
 # To do:
 # ==========================
 #
-# Disable tmpfs for /tmp
 # /etc/fstab
 # Compile Kernel ****KEEP BUILD DIRECTORY!****
 # (It's needed for Realtek driver compilation)
