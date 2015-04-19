@@ -22,7 +22,7 @@ GetMac="$(ip link | grep ether | awk '{print $2}')"
 
 # Set UDEV rule to rename ethlink to eth0 :)
 cat > /etc/udev/rules.d/10-network.rules << "EOF"
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="Mac", NAME="net1"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="Mac", NAME="eth0"
 
 EOF
 
