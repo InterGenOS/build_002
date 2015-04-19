@@ -763,6 +763,40 @@ ln -sfv /dev/null /etc/systemd/system/tmp.mount
 
 ##------------------------------------------------------
 
+cat > ~/.vimrc << "EOF"
+" Begin .vimrc
+
+set columns=80
+set wrapmargin=8
+set ruler
+set background=dark
+set cmdheight=2
+
+
+" End .vimrc
+
+EOF
+
+cp ~/.vimrc /etc/skel/.vimrc
+cp /etc/nanorc ~/.nanorc
+cp /etc/nanorc /etc/skel/.nanorc
+
+##------------------------------------------------------
+
+touch /etc/issue
+clear > /etc/issue
+echo "InterGen OS \r (\l)" >> /etc/issue
+
+##------------------------------------------------------
+
+
+
+##------------------------------------------------------
+
+##------------------------------------------------------
+
+##------------------------------------------------------
+
 echo " "
 echo " "
 echo " "
