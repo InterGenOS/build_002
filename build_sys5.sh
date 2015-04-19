@@ -755,6 +755,8 @@ EOF
 
 dircolors -p > /etc/dircolors
 
+dircolors -p > /etc/skel/.dircolors
+
 ##------------------------------------------------------
 
 ln -sfv /dev/null /etc/systemd/system/tmp.mount
