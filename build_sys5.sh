@@ -834,13 +834,11 @@ PARTNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[^0-9]*//g')
 if [ "$HDNUMBER" = sda ]; then
      sed -i "s/yyy/0/g" intergenos.grub.cfg
    elif [ "$HDNUMBER" = sdb ]; then
-        sed -i "s/yyy/1/g" intergenos.grub.cfg
-      elif [ "$HDNUMBER" = sdc ]; then
-           sed -i "s/yyy/2/g" intergenos.grub.cfg
-      else
-           sed -i "s/yyy/3/g" intergenos.grub.cfg
-      fi
-   fi
+     sed -i "s/yyy/1/g" intergenos.grub.cfg
+   elif [ "$HDNUMBER" = sdc ]; then
+     sed -i "s/yyy/2/g" intergenos.grub.cfg
+   else
+     sed -i "s/yyy/3/g" intergenos.grub.cfg
 fi
 sed -i "s/zzz/$PARTNUMBER/g" intergenos.grub.cfg
 cat <(head -n$(cat -n grub.cfg | grep 'BEGIN /etc/grub.d/40_custom' | awk '{print $1}') grub.cfg) >> grub.new
