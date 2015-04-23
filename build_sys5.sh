@@ -819,7 +819,7 @@ install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 
 # End /etc/modprobe.d/usb.conf
 EOF
-cd ../
+cd ~
 
 mkdir /var/log/buildlogs
 mv *-mkck-* /var/log/buildlogs/
