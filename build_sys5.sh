@@ -891,7 +891,7 @@ echo "Main system configurations have been completed"
 echo " "
 echo "If your build has completed to this point, feel free to continue on at:"
 echo " "
-echo "http://linuxfromscratch.org/lfs/view/stable-systemd/chapter08/fstab.html"
+echo "http://linuxfromscratch.org/lfs/view/stable-systemd/chapter09/reboot.html"
 echo " "
 echo "making sure to substitute \$IGos for any \$LFS that you see listed,"
 echo "or you can wait for script updates at https://github.com/InterGenOS/build_002"
@@ -902,13 +902,12 @@ echo "Thank you, and remember- The cake is a lie"
 echo " "
 echo " "
 
-# Updates to follow -4-16-15
+# Updates to follow -4-23-15
 # --------------------------
 #
 # To do:
 # ==========================
 #
-# /etc/os-release
-# /etc/lsb-release
 # Begin Linpack Pkg Generation
+# Begin 'base' pkg scripting
 # Script core FS layout
