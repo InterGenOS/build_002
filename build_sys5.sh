@@ -789,14 +789,103 @@ echo "InterGen OS \r (\l)" >> /etc/issue
 
 ##------------------------------------------------------
 
+mv /intergenos.fstab /etc/fstab
+ROOTMOUNT=$(mount | grep '\/dev\/sd' | awk '{print $1}')
+ROOTUUID=$(blkid $ROOTMOUNT | awk '{print $2}' | cut -d '"' -f 2 | cut -d '"' -f 1)
+sed -i "s/xxx/$ROOTUUID/" /etc/fstab
+
+##------------------------------------------------------
+
+cd /sources
+tar xf linux-3.19.tar.xz &&
+cd linux-3.19
+make mrproper &&
+mv /intergen.config .config
+make &&
+make modules_install
+cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-3.19-intergen-002-systemd
+cp -v System.map /boot/System.map-intergen-3.19
+install -d /usr/share/doc/linux-3.19
+cp -r Documentation/* /usr/share/doc/linux-3.19
+
+##------------------------------------------------------
+
+install -v -m755 -d /etc/modprobe.d
+cat > /etc/modprobe.d/usb.conf << "EOF"
+# Begin /etc/modprobe.d/usb.conf
+
+install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
+install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
+
+# End /etc/modprobe.d/usb.conf
+EOF
+cd ../
+
+mkdir /var/log/buildlogs
+mv *-mkck-* /var/log/buildlogs/
+mv gmp-check-logA /var/log/buildlogs/
+
+##------------------------------------------------------
+
+sed -i "s/xxx/$ROOTUUID/g" intergenos.grub.cfg
+GRUBTARGET=$(echo $ROOTMOUNT | sed 's/[0-9]*//g')
+HDNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[0-9]*//g')
+PARTNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[^0-9]*//g')
+if [ "$HDNUMBER" = sda ]; then
+     sed -i "s/yyy/0/g" intergenos.grub.cfg
+   elif [ "$HDNUMBER" = sdb ]; then
+        sed -i "s/yyy/1/g" intergenos.grub.cfg
+      elif [ "$HDNUMBER" = sdc ]; then
+           sed -i "s/yyy/2/g" intergenos.grub.cfg
+      else
+           sed -i "s/yyy/3/g" intergenos.grub.cfg
+      fi
+   fi
+fi
+sed -i "s/zzz/$PARTNUMBER/g" intergenos.grub.cfg
+cat <(head -n$(cat -n grub.cfg | grep 'BEGIN /etc/grub.d/40_custom' | awk '{print $1}') grub.cfg) >> grub.new
+cat intergenos.grub.cfg >> grub.new
+sed -e '1,/END \/etc\/grub.d\/40_custom/d' grub.cfg >> grub.new
+
+grub-install $GRUBTARGET
+unset ROOTMOUNT ROOTUUID GRUBTARGET PARTNUMBER HDNUMBER
+mv grub.new /boot/grub/grub.cfg
+rm -rf grub.cfg
+
+##------------------------------------------------------
+
+cat > /etc/os-release << "EOF"
+NAME="InterGen OS"
+VERSION=".002SD"
+ID=igos
+PRETTY_NAME="InterGen OS"
+EOF
+
+echo .002SD > /etc/igos-release
+
+##------------------------------------------------------
+
+cat > /etc/lsb-release << "EOF"
+DISTRIB_ID="InterGen OS"
+DISTRIB_RELEASE=".002SD"
+DISTRIB_CODENAME="InterGen"
+DISTRIB_DESCRIPTION="InterGen OS"
+EOF
+
+##------------------------------------------------------
+
+echo "/bin/bash ./finalize_setup.sh" >> /root/.bashrc
+
+##------------------------------------------------------
 
 
 ##------------------------------------------------------
 
-##------------------------------------------------------
 
 ##------------------------------------------------------
 
+
+##------------------------------------------------------
 echo " "
 echo " "
 echo " "
@@ -821,10 +910,6 @@ echo " "
 # To do:
 # ==========================
 #
-# /etc/fstab
-# Compile Kernel ****KEEP BUILD DIRECTORY!****
-# (It's needed for Realtek driver compilation)
-# GRUB (can re-use template from build_001)
 # /etc/os-release
 # /etc/lsb-release
 # Begin Linpack Pkg Generation

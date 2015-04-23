@@ -35,6 +35,10 @@ wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys2.sh
 wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys3.sh -P $IGos
 wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys4.sh -P $IGos
 wget https://raw.githubusercontent.com/InterGenOS/build_002/master/build_sys5.sh -P $IGos
+wget https://raw.githubusercontent.com/InterGenOS/build_002/master/intergenos.fstab -P $IGos
+wget https://raw.githubusercontent.com/InterGenOS/build_002/master/intergenos.config -P $IGos
+wget https://raw.githubusercontent.com/InterGenOS/build_002/master/intergenos.grub.cfg -P $IGos
+wget https://raw.githubusercontent.com/InterGenOS/build_002/master/intergenos.remove -P $IGos
 
 chmod +x $IGos/setup_structure.sh
 chmod +x $IGos/build_sys.sh

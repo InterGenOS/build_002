@@ -190,6 +190,7 @@ chmod +x $IGos/setup_chroot.sh
 
 chown -v igos $IGos/build_temp_sys.sh
 chown -v igos $IGos/setup_chroot.sh
+cp /boot/grub/grub.cfg $IGos/grub.cfg
 
 ### Set .bash_profile and .bashrc for user 'igos'
 
@@ -240,7 +241,7 @@ clearLine
 echo " "
 echo " "
 echo " "
-echo "Reticulating Splines - Switching shells..."
+echo "Moving stuff out of the way - Switching shells..."
 sleep 2
 clearLine
 echo "Go grab yourself a stimulating beverage..."

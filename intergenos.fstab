@@ -1,0 +1,12 @@
+#
+# BEGIN /etc/fstab
+#
+# Created by InterGen                            
+#
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+# UUID or /dev/sdXX                           					MP    	TYPE  	OPTIONS       			D     	F
+
+UUID=xxx									/       ext4    rw,relatime,data=ordered        0       1
+
+# END /etc/fstab
