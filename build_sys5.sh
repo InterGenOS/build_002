@@ -598,8 +598,8 @@ EOF
 
 cat > ~/.bash_logout << "EOF"
 # Begin ~/.bash_logout
-Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
-2/25/15
+# Written by Christopher 'InterGen' Cork <chris@intergenstudios.com>
+# 2/25/15
 
 # Personal items to perform on logout.
 
