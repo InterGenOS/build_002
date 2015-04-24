@@ -6,6 +6,7 @@
 rm -rf /tools &&
 
 ##------------------------------------------------------
+mkdir -pv /etc/systemd/network
 
 cat > /etc/systemd/network/10-dhcp-eth0.network << "EOF"
 [Match]
@@ -20,6 +21,8 @@ EOF
 
 GetMac="$(ip link | grep ether | awk '{print $2}')"
 
+mkdir -pv /etc/udev/rules.d
+
 # Set UDEV rule to rename ethlink to eth0 :)
 cat > /etc/udev/rules.d/10-network.rules << "EOF"
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="Mac", NAME="eth0"
@@ -31,16 +34,6 @@ sed -i "s/Mac/$GetMac/" /etc/udev/rules.d/10-network.rules &&
 unset GetMac
 
 ##------------------------------------------------------
-
-cat > /etc/resolv.conf << "EOF"
-# Begin /etc/resolv.conf
-
-nameserver 8.8.8.8
-nameserver 8.8.4.4
-
-# End /etc/resolv.conf
-
-EOF
 
 ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
@@ -800,7 +793,7 @@ cd /sources
 tar xf linux-3.19.tar.xz &&
 cd linux-3.19
 make mrproper &&
-mv /intergen.config .config
+mv /intergenos.config .config
 make &&
 make modules_install
 cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-3.19-intergen-002-systemd
@@ -822,33 +815,33 @@ EOF
 cd ~
 
 mkdir /var/log/buildlogs
-mv *-mkck-* /var/log/buildlogs/
-mv gmp-check-logA /var/log/buildlogs/
+mv /*-mkck-* /var/log/buildlogs/
+mv /gmp-check-logA /var/log/buildlogs/
 
 ##------------------------------------------------------
 
-sed -i "s/xxx/$ROOTUUID/g" intergenos.grub.cfg
+sed -i "s/xxx/$ROOTUUID/g" /intergenos.grub.cfg
 GRUBTARGET=$(echo $ROOTMOUNT | sed 's/[0-9]*//g')
 HDNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[0-9]*//g')
 PARTNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[^0-9]*//g')
 if [ "$HDNUMBER" = sda ]; then
-     sed -i "s/yyy/0/g" intergenos.grub.cfg
+     sed -i "s/yyy/0/g" /intergenos.grub.cfg
    elif [ "$HDNUMBER" = sdb ]; then
-     sed -i "s/yyy/1/g" intergenos.grub.cfg
+     sed -i "s/yyy/1/g" /intergenos.grub.cfg
    elif [ "$HDNUMBER" = sdc ]; then
-     sed -i "s/yyy/2/g" intergenos.grub.cfg
+     sed -i "s/yyy/2/g" /intergenos.grub.cfg
    else
-     sed -i "s/yyy/3/g" intergenos.grub.cfg
+     sed -i "s/yyy/3/g" /intergenos.grub.cfg
 fi
-sed -i "s/zzz/$PARTNUMBER/g" intergenos.grub.cfg
-cat <(head -n$(cat -n grub.cfg | grep 'BEGIN /etc/grub.d/40_custom' | awk '{print $1}') grub.cfg) >> grub.new
-cat intergenos.grub.cfg >> grub.new
-sed -e '1,/END \/etc\/grub.d\/40_custom/d' grub.cfg >> grub.new
+sed -i "s/zzz/$PARTNUMBER/g" /intergenos.grub.cfg
+cat <(head -n$(cat -n grub.cfg | grep 'BEGIN /etc/grub.d/40_custom' | awk '{print $1}') /grub.cfg) >> grub.new
+cat /intergenos.grub.cfg >> grub.new
+sed -e '1,/END \/etc\/grub.d\/40_custom/d' /grub.cfg >> grub.new
 
 grub-install $GRUBTARGET
 unset ROOTMOUNT ROOTUUID GRUBTARGET PARTNUMBER HDNUMBER
 mv grub.new /boot/grub/grub.cfg
-rm -rf grub.cfg
+rm -rf /grub.cfg
 
 ##------------------------------------------------------
 

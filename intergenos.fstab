@@ -7,6 +7,6 @@
 #
 # UUID or /dev/sdXX                           					MP    	TYPE  	OPTIONS       			D     	F
 
-UUID=xxx									/       ext4    rw,relatime,data=ordered        0       1
+UUID=xxx					/       ext4    rw,relatime,data=ordered        0       1
 
 # END /etc/fstab

@@ -869,7 +869,7 @@ echo "  the following command to strip unnecessary symbols from "
 echo "  binaries and libraries and continue the build:"
 echo " "
 echo "  /tools/bin/find /{,usr/}{bin,lib,sbin} -type f \\"
-echo "      -exec /tools/bin/strip --strip-debug '{}' ';' &&"
+echo "      -exec /tools/bin/strip --strip-debug '{}' ';'" &&
 echo " "
 echo " "
 echo " -------------------------------- "
