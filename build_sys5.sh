@@ -825,6 +825,7 @@ sed -i "s/xxx/$ROOTUUID/g" /intergenos.grub.cfg
 GRUBTARGET=$(echo $ROOTMOUNT | sed 's/[0-9]*//g')
 HDNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[0-9]*//g')
 PARTNUMBER=$(echo $ROOTMOUNT | cut -d '/' -f 3 | sed 's/[^0-9]*//g')
+sed -i "s/vvv/$ROOTMOUNT/g" /intergenos.grub.cfg
 if [ "$HDNUMBER" = sda ]; then
      sed -i "s/yyy/0/g" /intergenos.grub.cfg
    elif [ "$HDNUMBER" = sdb ]; then
