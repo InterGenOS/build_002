@@ -798,6 +798,7 @@ make &&
 make modules_install
 cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-3.19-intergen-002-systemd
 cp -v System.map /boot/System.map-intergen-3.19
+cp -v .config /boot/config-intergen-3.19
 install -d /usr/share/doc/linux-3.19
 cp -r Documentation/* /usr/share/doc/linux-3.19
 
