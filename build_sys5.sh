@@ -817,6 +817,7 @@ cd ~
 mkdir /var/log/buildlogs
 mv /*-mkck-* /var/log/buildlogs/
 mv /gmp-check-logA /var/log/buildlogs/
+mv /grub.cfg /sources/linux-3.19/
 
 ##------------------------------------------------------
 
@@ -834,14 +835,13 @@ if [ "$HDNUMBER" = sda ]; then
      sed -i "s/yyy/3/g" /intergenos.grub.cfg
 fi
 sed -i "s/zzz/$PARTNUMBER/g" /intergenos.grub.cfg
-cat <(head -n$(cat -n grub.cfg | grep 'BEGIN /etc/grub.d/40_custom' | awk '{print $1}') /grub.cfg) >> grub.new
+cat <(head -n$(cat -n grub.cfg | grep 'BEGIN /etc/grub.d/40_custom' | awk '{print $1}') grub.cfg) >> grub.new
 cat /intergenos.grub.cfg >> grub.new
 sed -e '1,/END \/etc\/grub.d\/40_custom/d' /grub.cfg >> grub.new
 
 grub-install $GRUBTARGET
 unset ROOTMOUNT ROOTUUID GRUBTARGET PARTNUMBER HDNUMBER
 mv grub.new /boot/grub/grub.cfg
-rm -rf /grub.cfg
 
 ##------------------------------------------------------
 
